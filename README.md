@@ -27,7 +27,13 @@ AU and VST3 are copied to `~/Library/Audio/Plug-Ins` after each build. The unsig
 
 Builds universal (arm64 + x86_64) AU and VST3, signs them with Developer ID, builds a signed `.pkg` that installs to `/Library/Audio/Plug-Ins`, then notarizes and staples it. Output: `dist/Vibetron-VT-369-<version>.pkg`. Requires the `vibetron` notarytool keychain profile.
 
-Bump the version in `CMakeLists.txt` (`project(Vibetron VERSION ...)`) before each release.
+To publish, bump the version in `CMakeLists.txt` (`project(Vibetron VERSION ...)`), commit and push, then run:
+
+```bash
+./scripts/package_macos.sh --publish
+```
+
+This also tags `v<version>` and creates a GitHub release with the notarized `.pkg` attached. It refuses to run from uncommitted or unpushed changes.
 
 AAX release builds need PACE signing (wraptool) before Apple signing; this isn't wired up yet.
 
