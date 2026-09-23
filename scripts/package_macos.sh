@@ -2,6 +2,10 @@
 # package_macos.sh — universal build, sign, package, notarize and staple the Vibetron VT-369 installer.
 # Produces dist/Vibetron-VT-369-<version>.pkg installing the AU and VST3 into /Library/Audio/Plug-Ins.
 # AAX is not included yet: it must be PACE-signed (wraptool) before Apple signing.
+#
+# Usage: ./scripts/package_macos.sh [--publish]
+#   --publish  also tag v<version> and publish a GitHub release with the .pkg attached
+#              (requires a clean, pushed working tree; bump the version in CMakeLists.txt first)
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -19,6 +23,25 @@ ARTEFACTS="$BUILD_DIR/Vibetron_artefacts/Release"
 WORK="$BUILD_DIR/pkg-work"
 DIST="dist"
 PKG_OUT="$DIST/Vibetron-VT-369-$VERSION.pkg"
+TAG="v$VERSION"
+
+PUBLISH=0
+for arg in "$@"; do
+    case "$arg" in
+        --publish) PUBLISH=1 ;;
+        *) echo "Unknown option: $arg"; exit 2 ;;
+    esac
+done
+
+if [[ "$PUBLISH" == 1 ]]; then
+    # A release must correspond to a commit that exists on GitHub.
+    git diff --quiet && git diff --cached --quiet || { echo "Commit your changes before publishing."; exit 1; }
+    git fetch -q origin
+    [[ "$(git rev-parse HEAD)" == "$(git rev-parse @{u})" ]] || { echo "Push main before publishing."; exit 1; }
+    if git rev-parse -q --verify "refs/tags/$TAG" > /dev/null && [[ "$(git rev-list -n1 "$TAG")" != "$(git rev-parse HEAD)" ]]; then
+        echo "Tag $TAG already points at another commit. Bump the version in CMakeLists.txt."; exit 1
+    fi
+fi
 
 echo "=== 1. Universal release build (arm64 + x86_64) ==="
 cmake -B "$BUILD_DIR" -G Xcode \
@@ -105,5 +128,20 @@ echo "=== 6. Staple and validate ==="
 xcrun stapler staple "$PKG_OUT"
 xcrun stapler validate "$PKG_OUT"
 spctl --assess --type install --verbose "$PKG_OUT"
+
+if [[ "$PUBLISH" == 1 ]]; then
+    echo "=== 7. Publish GitHub release $TAG ==="
+    if gh release view "$TAG" > /dev/null 2>&1; then
+        gh release upload "$TAG" "$PKG_OUT" --clobber
+    else
+        git rev-parse -q --verify "refs/tags/$TAG" > /dev/null || git tag -a "$TAG" -m "$PRODUCT $VERSION"
+        git push -q origin "$TAG"
+        gh release create "$TAG" "$PKG_OUT" --verify-tag --title "$PRODUCT $VERSION" --notes "Notarized macOS installer for $PRODUCT $VERSION.
+
+- AU and VST3, universal (Apple Silicon + Intel), macOS 11 or later
+- Installs to /Library/Audio/Plug-Ins (choose AU, VST3 or both via Customize)"
+    fi
+    gh release view "$TAG" --json url --jq .url
+fi
 
 echo "Done: $PKG_OUT"
