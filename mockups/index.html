@@ -1,0 +1,636 @@
+<title>Vibetron VT-369 Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Deliberately single-theme: a dark listening-room showroom so the hardware finishes read true. */
+  :root {
+    color-scheme: dark;
+    --ground: #12110f;
+    --ground-2: #1a1916;
+    --ink: #ebe4d6;
+    --muted: #9b9385;
+    --rule: #2e2b26;
+    --brass: #d3a85c;
+    --legend: "Jost", Futura, "Avenir Next", "Helvetica Neue", sans-serif;
+    --script: "Bodoni Moda", Didot, "Bodoni 72", Georgia, serif;
+    --mono: "IBM Plex Mono", Menlo, ui-monospace, monospace;
+  }
+  body { background: var(--ground); color: var(--ink); font-family: var(--legend); font-size: 15px; line-height: 1.55; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding-inline: 20px; padding-block: 56px 96px; display: grid; gap: 72px; }
+
+  header { display: grid; gap: 14px; max-width: 70ch; }
+  .eyebrow { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--brass); }
+  h1 { font-family: var(--script); font-weight: 400; font-style: italic; font-size: clamp(38px, 6vw, 64px); line-height: 1.02; margin: 0; text-wrap: balance; }
+  h1 b { font-style: normal; font-weight: 500; font-family: var(--legend); letter-spacing: .18em; font-size: .42em; vertical-align: middle; margin-left: .3em; color: var(--muted); }
+  header p { margin: 0; color: var(--muted); }
+
+  .modes { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .modes div { padding: 18px 20px 18px 0; display: grid; gap: 2px; }
+  .modes div + div { padding-left: 20px; border-left: 1px solid var(--rule); }
+  .modes .n { font-family: var(--script); font-style: italic; font-size: 26px; }
+  .modes .g { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+  .modes .t { font-size: 12px; color: var(--muted); letter-spacing: .06em; }
+
+  section.dir { display: grid; gap: 18px; }
+  .dir-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
+  .dir-head h2 { margin: 0; font-family: var(--script); font-weight: 400; font-size: 32px; }
+  .dir-head h2 span { font-family: var(--legend); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--brass); margin-right: 14px; vertical-align: middle; }
+  .dir-head p { margin: 0; color: var(--muted); max-width: 56ch; font-size: 14px; }
+  .unit { border-radius: 10px; overflow: hidden; box-shadow: 0 40px 80px -30px #000, 0 0 0 1px #0008; background: #000; }
+  .unit svg { display: block; width: 100%; height: auto; }
+  .unit svg .hit { cursor: pointer; }
+  .unit svg .hit:focus-visible { outline: none; }
+  .unit svg .hit:focus-visible .focusring { stroke: #fff; stroke-width: 1.5; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips button { font: 500 12px/1 var(--legend); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); background: var(--ground-2); border: 1px solid var(--rule); border-radius: 999px; padding: 9px 14px; cursor: pointer; }
+  .chips button[aria-pressed="true"] { color: var(--ground); background: var(--brass); border-color: var(--brass); }
+  .chips button:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+  .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 28px; font-size: 13px; color: var(--muted); }
+  .notes b { color: var(--ink); font-weight: 500; letter-spacing: .04em; }
+
+  footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--rule); padding-top: 20px; }
+  footer code { font-family: var(--mono); color: var(--ink); font-size: 12px; }
+
+  @media (max-width: 620px) {
+    .modes { grid-template-columns: 1fr; }
+    .modes div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
+  }
+  @media (prefers-reduced-motion: reduce) { .unit svg * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Design review · AU / VST3</div>
+    <h1>Vibetron <b>VT-369</b></h1>
+    <p>Here are three hardware directions for the plugin, shown as live mockups. The needles run on VU ballistics driven by simulated programme material. Switch modes on any unit to see its theme. Each mode reskins the whole faceplate and loads its own liner notes.</p>
+    <div class="modes" aria-label="Operating modes">
+      <div><span class="t">MODE I</span><span class="n">Silk</span><span class="g">air · openness</span></div>
+      <div><span class="t">MODE II</span><span class="n">Velvet</span><span class="g">warmth · density</span></div>
+      <div><span class="t">MODE III</span><span class="n">Obsidian</span><span class="g">depth · holography</span></div>
+    </div>
+  </header>
+
+  <section class="dir" id="walnut">
+    <div class="dir-head">
+      <h2><span>Direction A</span>Walnut &amp; Brass</h2>
+      <p>1970s studio outboard: oiled walnut cheeks, a brushed faceplate, backlit paper meters and a chicken-head selector. The faceplate lacquer changes per mode.</p>
+    </div>
+    <div class="unit"></div>
+    <div class="chips" role="group" aria-label="Walnut mode"></div>
+    <div class="notes">
+      <div><b>Feel:</b> warm, familiar, premium. Reads well at small sizes.</div>
+      <div><b>Mode cue:</b> champagne → oxblood → black lacquer with gold legends. A jewel pilot lamp and louvres add hardware texture.</div>
+    </div>
+  </section>
+
+  <section class="dir" id="broadcast">
+    <div class="dir-head">
+      <h2><span>Direction B</span>Broadcast Console</h2>
+      <p>A 1960s transmission-desk module: hammertone enamel, rack ears, illuminated push-buttons, and the mode notes on a taped index card.</p>
+    </div>
+    <div class="unit"></div>
+    <div class="chips" role="group" aria-label="Broadcast mode"></div>
+    <div class="notes">
+      <div><b>Feel:</b> engineered, characterful, a little playful.</div>
+      <div><b>Mode cue:</b> machine grey → BBC green → graphite navy, with a different lamp colour for each.</div>
+      <div><b>Tradeoff:</b> the busiest texture of the three, and the loudest in a crowded session.</div>
+    </div>
+  </section>
+
+  <section class="dir" id="midnight">
+    <div class="dir-head">
+      <h2><span>Direction C</span>Midnight Glass</h2>
+      <p>A flagship hi-fi amplifier after dark: a black glass fascia, gold legends, and meters glowing through smoked glass.</p>
+    </div>
+    <div class="unit"></div>
+    <div class="chips" role="group" aria-label="Midnight mode"></div>
+    <div class="notes">
+      <div><b>Feel:</b> luxurious, cinematic, most modern of the three.</div>
+      <div><b>Mode cue:</b> meter glow shifts warm gold → rose → sapphire.</div>
+      <div><b>Tradeoff:</b> relies on glow, so it needs a dark DAW theme to shine.</div>
+      <div><b>Built:</b> this is the direction implemented in the plugin, including the machined knob.</div>
+    </div>
+  </section>
+
+  <footer>
+    Meters are calibrated to <code>0 VU = −18 dBFS</code> (switchable to −14 or −20), with 300 ms integration and about 1.5% overshoot. Surfaces use brushed metal, walnut, paper and film grain throughout.
+  </footer>
+</div>
+
+<script>
+(() => {
+  const MODES = [
+    { num: "I",   name: "Silk",     gain: 0.3, tag: "AIR · OPENNESS",
+      text: "A whisper of harmonic grace. Silk lifts the veil between you and the performance: transients bloom with ribbon-like ease, the soundstage breathes a quarter-inch wider, and the air above 12 kHz turns palpable. Not brighter. Truer." },
+    { num: "II",  name: "Velvet",   gain: 0.6, tag: "WARMTH · DENSITY",
+      text: "The sound of a warm room at 2 a.m. Midrange takes on a liquid, tactile density; vocals step out from the speakers and sit beside you. Low end gains the rounded authority of well-biased tape, and the blacks get blacker." },
+    { num: "III", name: "Obsidian", gain: 0.9, tag: "DEPTH · HOLOGRAPHY",
+      text: "Our most uncompromising topology. A holographic, three-dimensional presentation with bass you feel as much as hear, and image specificity that borders on uncanny. Once heard, the bypassed signal may sound permanently flat." },
+  ];
+
+  // ---------- VU meter geometry ----------
+  const MAX_DB = 3, SWEEP = 96;
+  const posOf = db => Math.pow(10, db / 20) / Math.pow(10, MAX_DB / 20);   // VU needle travels linear in voltage
+  const angOf = p => -SWEEP / 2 + SWEEP * p;
+  const polar = (cx, cy, r, a) => [cx + r * Math.sin(a * Math.PI / 180), cy - r * Math.cos(a * Math.PI / 180)];
+  const arc = (cx, cy, r, a0, a1) => { const [x0, y0] = polar(cx, cy, r, a0), [x1, y1] = polar(cx, cy, r, a1); return `M${x0.toFixed(2)} ${y0.toFixed(2)} A${r} ${r} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`; };
+
+  // cls: class prefix for face/ink/red/needle styling. glowId: gradient id for the backlight.
+  function meterFace(p, w, h, label) {
+    const cx = w / 2, cy = h * 1.08, r = h * 0.82;
+    let s = "";
+    const aRed = angOf(posOf(0)), aMax = angOf(1), aMin = angOf(posOf(-20));
+    s += `<path d="${arc(cx, cy, r, aMin, aRed)}" class="m-ink" fill="none" stroke-width="1.4"/>`;
+    s += `<path d="${arc(cx, cy, r + 3, aRed, aMax)}" class="m-red" fill="none" stroke-width="7"/>`;
+    s += `<path d="${arc(cx, cy, r, aRed, aMax)}" class="m-red" fill="none" stroke-width="1.4"/>`;
+    const major = [-20, -10, -7, -5, -3, -2, -1, 0, 1, 2, 3];
+    const minor = [-15, -8, -6, -4, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5];
+    minor.forEach(db => { const a = angOf(posOf(db)); const [x0, y0] = polar(cx, cy, r, a), [x1, y1] = polar(cx, cy, r + 5, a); s += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" class="${db > 0 ? "m-red" : "m-ink"}" stroke-width="0.9"/>`; });
+    major.forEach(db => {
+      const a = angOf(posOf(db)); const [x0, y0] = polar(cx, cy, r - 1, a), [x1, y1] = polar(cx, cy, r + 10, a), [tx, ty] = polar(cx, cy, r + 19, a);
+      s += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" class="${db > 0 ? "m-red" : "m-ink"}" stroke-width="1.6"/>`;
+      s += `<text x="${tx}" y="${ty + 3.5}" text-anchor="middle" class="m-num ${db > 0 ? "m-redt" : "m-inkt"}" font-size="${db === 0 ? 11 : 9.5}">${db > 0 ? "+" + db : Math.abs(db)}</text>`;
+    });
+    [0, 20, 40, 60, 80, 100].forEach(pct => {
+      const a = angOf(pct / 100 * posOf(0)); const [x0, y0] = polar(cx, cy, r - 6, a), [x1, y1] = polar(cx, cy, r - 1, a), [tx, ty] = polar(cx, cy, r - 14, a);
+      s += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" class="m-ink" stroke-width="0.8" opacity=".7"/>`;
+      s += `<text x="${tx}" y="${ty + 3}" text-anchor="middle" class="m-inkt" font-size="6.5" opacity=".7">${pct}</text>`;
+    });
+    s += `<text x="${cx}" y="${h * 0.66}" text-anchor="middle" class="m-inkt m-vu" font-size="${h * 0.15}">VU</text>`;
+    s += `<text x="${cx}" y="${h * 0.79}" text-anchor="middle" class="m-inkt" font-size="6.5" letter-spacing="2.2" opacity=".75">${label}</text>`;
+    // needle + soft shadow, rotated from JS
+    s += `<g class="needle-shadow" data-cx="${cx}" data-cy="${cy}" transform="translate(3 4)"><line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy - r - 8}" stroke="#000" stroke-opacity=".22" stroke-width="2.2" stroke-linecap="round"/></g>`;
+    s += `<g class="needle" data-cx="${cx}" data-cy="${cy}"><line x1="${cx}" y1="${cy - 22}" x2="${cx}" y2="${cy - r - 8}" class="m-needle" stroke-width="1.5" stroke-linecap="round"/><line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy - 24}" class="m-needle" stroke-width="3"/></g>`;
+    // peak lamp
+    s += `<circle class="peak" cx="${w - 16}" cy="${h - 16}" r="3.6"/>`;
+    s += `<text x="${w - 24}" y="${h - 13.5}" text-anchor="end" class="m-inkt" font-size="5.5" letter-spacing="1.4" opacity=".7">PEAK</text>`;
+    return s;
+  }
+
+  function meter(p, idx, x, y, w, h, opts) {
+    const clip = `${p}clip${idx}`;
+    return `<g transform="translate(${x} ${y})">
+      ${opts.bezel(w, h)}
+      <clipPath id="${clip}"><rect width="${w}" height="${h}" rx="${opts.rx}"/></clipPath>
+      <g clip-path="url(#${clip})">
+        <rect width="${w}" height="${h}" class="m-face"/>
+        <rect width="${w}" height="${h}" fill="url(#${p}glow)" class="m-glow"/>
+        <rect width="${w}" height="${h}" filter="url(#paperF)" opacity=".16" style="mix-blend-mode:multiply"/>
+        ${meterFace(p, w, h, opts.label[idx])}
+        <rect width="${w}" height="${h * 0.45}" fill="url(#${p}glass)"/>
+        <rect width="${w}" height="${h}" fill="url(#${p}vignette)"/>
+      </g>
+    </g>`;
+  }
+
+  const grain = (W, H, o = .09) => `<rect width="${W}" height="${H}" filter="url(#grainF)" opacity="${o}" style="mix-blend-mode:overlay" pointer-events="none"/>`;
+  const louvres = (x, y, n, gap = 14, hgt = 26) => Array.from({ length: n }, (_, i) => `<rect x="${x + i * gap}" y="${y}" width="5" height="${hgt}" rx="2.5" fill="#000" fill-opacity=".55"/><line x1="${x + i * gap + 1}" y1="${y + hgt + .5}" x2="${x + i * gap + 4}" y2="${y + hgt + .5}" stroke="#fff" stroke-opacity=".22" stroke-width=".8"/>`).join("");
+  const jewel = (x, y, label, cls) => `<g class="jewel"><circle cx="${x}" cy="${y}" r="20" fill="url(#${cls}jglow)"/><circle cx="${x}" cy="${y}" r="9" fill="url(#screwG)"/><circle cx="${x}" cy="${y}" r="6" fill="url(#jewelG)"/>${[0,60,120,180,240,300].map(a => `<line x1="${x}" y1="${y}" x2="${x + 6 * Math.sin(a * Math.PI / 180)}" y2="${y - 6 * Math.cos(a * Math.PI / 180)}" stroke="#fff" stroke-opacity="${a % 120 ? .08 : .3}" stroke-width=".6"/>`).join("")}<ellipse cx="${x - 2.5}" cy="${y - 3}" rx="1.5" ry="1" fill="#fff" fill-opacity=".85"/>${label ? `<text x="${x + 16}" y="${y + 2.5}" class="t-legend t-sub" font-size="7" letter-spacing="2.4">${label}</text>` : ""}</g>`;
+  const screw = (x, y, a = 30) => `<g transform="translate(${x} ${y}) rotate(${a})"><circle r="6" fill="url(#screwG)" stroke="#0006" stroke-width=".6"/><rect x="-4.5" y="-0.8" width="9" height="1.6" fill="#0007"/></g>`;
+  const sharedDefs = `
+    <radialGradient id="screwG" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#f4f1ea"/><stop offset=".55" stop-color="#9c978d"/><stop offset="1" stop-color="#4a4740"/></radialGradient>
+    <filter id="paperF" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="12" result="a"/><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="3" result="b"/><feBlend in="a" in2="b" mode="multiply"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0" intercept="1"/></feComponentTransfer></filter>
+    <filter id="grainF" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="5"/><feColorMatrix type="saturate" values="0"/></filter>
+    <radialGradient id="jewelG" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff6e0"/><stop offset=".35" class="jewelstop"/><stop offset="1" stop-color="#3a1a08"/></radialGradient>
+    <linearGradient id="knobSide" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3632"/><stop offset="1" stop-color="#0c0b0a"/></linearGradient>`;
+
+  // ---------- Direction A : Walnut & Brass ----------
+  const walnut = {
+    themes: [
+      { plate: "#d8d1c1", plate2: "#b9b09d", ink: "#2b2723", sub: "#5b544a", accent: "#9a6f25", face: "#f4e7c6", glow: "#ffbe63", mink: "#2a2520", red: "#b3321f", needle: "#1c1a18", well: "#c9c0ad", lamp: "#ffc16a" },
+      { plate: "#6e2126", plate2: "#4a1519", ink: "#f2dfc4", sub: "#d4b391", accent: "#e1ad6c", face: "#f7dfcb", glow: "#ff8d6b", mink: "#3a1e18", red: "#a62a24", needle: "#241615", well: "#561a1e", lamp: "#ff9a6a" },
+      { plate: "#1c1b1d", plate2: "#0f0f10", ink: "#d8b66d", sub: "#9b8558", accent: "#d8b66d", face: "#efe3c3", glow: "#ffcb7a", mink: "#231f19", red: "#a8331f", needle: "#151311", well: "#141315", lamp: "#ffd27a" },
+    ],
+    build(p) {
+      const W = 800, H = 400;
+      const bez = (w, h) => `<rect x="-5" y="-5" width="${w + 10}" height="${h + 10}" rx="9" fill="#0c0b0a"/><rect x="-5" y="-5" width="${w + 10}" height="${h + 10}" rx="9" fill="none" stroke="url(#${p}bevel)" stroke-width="2"/>`;
+      const mopts = { rx: 5, bezel: bez, label: ["LEFT", "RIGHT"] };
+      // selector
+      const kx = 648, ky = 158;
+      let sel = "";
+      MODES.forEach((m, i) => {
+        const a = -52 + i * 52; const [lx, ly] = polar(kx, ky, 80, a); const [dx, dy] = polar(kx, ky, 56, a);
+        sel += `<g class="hit" data-mode="${i}" tabindex="0" role="button" aria-label="Mode ${m.num} ${m.name}">
+          <circle cx="${lx}" cy="${ly - 4}" r="22" fill="transparent" class="focusring" stroke="none"/>
+          <circle cx="${dx}" cy="${dy}" r="2.2" class="lamp" data-i="${i}"/>
+          <text x="${lx}" y="${ly - 2}" text-anchor="middle" class="t-legend t-ink" font-size="13" font-weight="500">${m.num}</text>
+          <text x="${lx}" y="${ly + 10}" text-anchor="middle" class="t-legend t-sub" font-size="6.5" letter-spacing="1.6">${m.name.toUpperCase()}</text>
+        </g>`;
+      });
+      return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" class="dirA">
+        <defs>${sharedDefs}
+          <filter id="${p}brush" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.0025 0.9" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0"/></filter>
+          <filter id="${p}wood" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.16" numOctaves="4" seed="9"/><feColorMatrix values="0 0 0 .34 .12  0 0 0 .19 .05  0 0 0 .09 .02  0 0 0 0 1"/></filter>
+          <linearGradient id="${p}plateSh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></linearGradient>
+          <linearGradient id="${p}bevel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".6"/><stop offset="1" stop-color="#fff" stop-opacity=".35"/></linearGradient>
+          <radialGradient id="${p}glow" cx=".5" cy=".95" r=".85"><stop offset="0" class="glowstop" stop-opacity=".55"/><stop offset="1" class="glowstop" stop-opacity="0"/></radialGradient>
+          <linearGradient id="${p}glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".32"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <radialGradient id="${p}vignette" cx=".5" cy=".6" r=".75"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".38"/></radialGradient>
+          <radialGradient id="${p}jglow"><stop offset="0" class="lampstop" stop-opacity=".5"/><stop offset="1" class="lampstop" stop-opacity="0"/></radialGradient>
+          <radialGradient id="${p}knobTop" cx=".38" cy=".3" r=".9"><stop offset="0" stop-color="#5a544d"/><stop offset=".6" stop-color="#1d1b19"/><stop offset="1" stop-color="#0a0908"/></radialGradient>
+        </defs>
+        <rect width="${W}" height="${H}" fill="#2c180e"/>
+        <rect x="0" width="36" height="${H}" filter="url(#${p}wood)"/>
+        <rect x="${W - 36}" width="36" height="${H}" filter="url(#${p}wood)"/>
+        <rect x="0" width="36" height="${H}" fill="url(#${p}plateSh)" opacity=".6"/><rect x="${W - 36}" width="36" height="${H}" fill="url(#${p}plateSh)" opacity=".6"/>
+        <rect x="36" width="${W - 72}" height="${H}" class="plate"/>
+        <rect x="36" width="${W - 72}" height="${H}" filter="url(#${p}brush)" opacity=".3" style="mix-blend-mode:overlay"/>
+        <rect x="36" width="${W - 72}" height="${H}" fill="url(#${p}plateSh)"/>
+        <rect x="36.5" y=".5" width="${W - 73}" height="${H - 1}" fill="none" stroke="#000" stroke-opacity=".45"/>
+        ${screw(54, 18)}${screw(W - 54, 18, 70)}${screw(54, H - 18, 110)}${screw(W - 54, H - 18, 10)}
+
+        <text x="72" y="50" class="t-legend t-ink" font-size="21" font-weight="500" letter-spacing="7">VIBETRON</text>
+        <text x="73" y="64" class="t-legend t-sub" font-size="7" letter-spacing="2.6">VT-369 · HARMONIC RESOLUTION ENGINE</text>
+        ${louvres(322, 34, 14)}
+        <text x="${W - 72}" y="56" text-anchor="end" class="t-script t-accent modeName" font-size="32" font-style="italic">Silk</text>
+
+        ${meter(p, 0, 72, 86, 222, 146, mopts)}
+        ${meter(p, 1, 312, 86, 222, 146, mopts)}
+
+        <!-- selector -->
+        <circle cx="${kx}" cy="${ky}" r="50" class="well" />
+        <circle cx="${kx}" cy="${ky}" r="50" fill="none" stroke="url(#${p}bevel)" stroke-width="1.5"/>
+        ${sel}
+        <g class="knob" data-cx="${kx}" data-cy="${ky}">
+          <circle cx="${kx}" cy="${ky}" r="50" fill="#000" fill-opacity="0.001"/>
+          <circle cx="${kx}" cy="${ky + 3}" r="34" fill="#000" opacity=".35"/>
+          <circle cx="${kx}" cy="${ky}" r="32" fill="url(#knobSide)"/>
+          <path d="M${kx - 9} ${ky + 24} L${kx - 6} ${ky - 44} Q${kx} ${ky - 50} ${kx + 6} ${ky - 44} L${kx + 9} ${ky + 24} Z" fill="url(#${p}knobTop)" stroke="#000" stroke-opacity=".6"/>
+          <circle cx="${kx}" cy="${ky}" r="25" fill="url(#${p}knobTop)"/>
+          <line x1="${kx}" y1="${ky - 18}" x2="${kx}" y2="${ky - 43}" stroke="#efe6d2" stroke-width="2.2" stroke-linecap="round"/>
+        </g>
+        ${jewel(600, 250, "OPERATE", p)}
+        <text x="303" y="252" text-anchor="middle" class="t-legend t-sub" font-size="7" letter-spacing="2.2">METER REFERENCE   0 VU = −18 dBFS</text>
+
+        <!-- liner notes -->
+        <rect x="72" y="268" width="${W - 144}" height="104" rx="6" class="well"/>
+        <rect x="72" y="268" width="${W - 144}" height="104" rx="6" fill="none" stroke="url(#${p}bevel)" stroke-width="1.2"/>
+        <foreignObject x="92" y="280" width="${W - 184}" height="86">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="notesA">
+            <div class="nhead"><span class="nnum">MODE I</span><span class="nname">Silk</span></div>
+            <p class="ntext"></p>
+          </div>
+        </foreignObject>
+        ${grain(W, H)}
+      </svg>`;
+    },
+    css(p) {
+      return `.dirA .plate{fill:var(--plate);transition:fill .6s} .dirA .well{fill:var(--well);transition:fill .6s}
+        .dirA .t-legend{font-family:var(--legend);filter:drop-shadow(0 .7px 0 rgba(255,255,255,.28))} .dirA .lampstop,.dirA .jewelstop{stop-color:var(--lamp)} .dirA .t-script{font-family:var(--script)} .dirA .t-mono{font-family:var(--mono)}
+        .dirA .t-ink{fill:var(--ink)} .dirA .t-sub{fill:var(--sub)} .dirA .t-accent{fill:var(--accent)} .dirA .readout{fill:#ffc56a}
+        .dirA .m-face{fill:var(--face);transition:fill .6s} .dirA .glowstop{stop-color:var(--glow)}
+        .dirA .m-ink{stroke:var(--mink)} .dirA .m-inkt{fill:var(--mink);font-family:var(--legend)} .dirA .m-red{stroke:var(--red)} .dirA .m-redt{fill:var(--red);font-family:var(--legend)}
+        .dirA .m-vu{font-family:var(--script);font-style:italic} .dirA .m-needle{stroke:var(--needle)}
+        .dirA .peak{fill:#4a1512} .dirA .peak.on{fill:#ff3b24;filter:drop-shadow(0 0 4px #ff3b24)}
+        .dirA .lamp{fill:#0005} .dirA .lamp.on{fill:#ffcf7a;filter:drop-shadow(0 0 3px #ffb347)}
+        .dirA .knob{transition:transform .2s cubic-bezier(.2,.8,.3,1);cursor:grab} .dirA.dragging .knob{transition:none;cursor:grabbing}
+        .dirA .notesA{font-family:var(--legend);color:var(--ink)} .dirA .nhead{display:flex;align-items:baseline;gap:10px;margin-bottom:3px}
+        .dirA .nnum{font-size:7.5px;letter-spacing:2.4px;color:var(--sub)} .dirA .nname{font-family:var(--script);font-style:italic;font-size:15px;color:var(--accent)}
+        .dirA .ntext{margin:0;font-size:9.6px;line-height:1.5;color:var(--ink);opacity:.9;max-width:none}`;
+    },
+  };
+
+  // ---------- Direction B : Broadcast Console ----------
+  const broadcast = {
+    themes: [
+      { plate: "#8f9a9c", ink: "#1b2124", sub: "#3a4448", lamp: "#ffcf5c", strip: "#15191b", stripInk: "#e8e4d8", face: "#f3efe2", glow: "#fff3cf", mink: "#1c1c1a", red: "#c0301f", needle: "#111", card: "#f4ecd8" },
+      { plate: "#5d7165", ink: "#eef0e6", sub: "#c8d2c6", lamp: "#ff6a45", strip: "#1a211c", stripInk: "#eef0e6", face: "#f1eee1", glow: "#ffe0cf", mink: "#1c1c1a", red: "#c0301f", needle: "#111", card: "#f6eedb" },
+      { plate: "#2e3744", ink: "#e9e3d2", sub: "#a6afbd", lamp: "#79d2ff", strip: "#10141a", stripInk: "#e9e3d2", face: "#eceee9", glow: "#d9efff", mink: "#1c1c1a", red: "#c0301f", needle: "#111", card: "#efe8d6" },
+    ],
+    build(p) {
+      const W = 800, H = 400;
+      const bez = (w, h) => `<rect x="-10" y="-10" width="${w + 20}" height="${h + 20}" rx="4" fill="#111315"/><rect x="-10" y="-10" width="${w + 20}" height="${h + 20}" rx="4" fill="none" stroke="#ffffff" stroke-opacity=".14"/><rect x="-2" y="-2" width="${w + 4}" height="${h + 4}" fill="#000"/>`;
+      const mopts = { rx: 1, bezel: bez, label: ["CHANNEL A", "CHANNEL B"] };
+      let btns = "";
+      MODES.forEach((m, i) => {
+        const y = 78 + i * 58;
+        btns += `<g class="hit" data-mode="${i}" tabindex="0" role="button" aria-label="Mode ${m.num} ${m.name}" transform="translate(556 ${y})">
+          <rect x="-4" y="-4" width="72" height="54" rx="5" fill="#0c0e10"/>
+          <rect width="64" height="46" rx="3" class="btn focusring" data-i="${i}"/>
+          <rect width="64" height="46" rx="3" fill="url(#${p}btnSh)"/>
+          <text x="32" y="29" text-anchor="middle" class="t-legend btxt" data-i="${i}" font-size="15" font-weight="600">${m.num}</text>
+          <text x="80" y="20" class="t-legend t-ink" font-size="10.5" font-weight="500" letter-spacing="2.4">${m.name.toUpperCase()}</text>
+          <text x="80" y="34" class="t-legend t-sub" font-size="7.5" letter-spacing="1.6">${m.tag}</text>
+        </g>`;
+      });
+      return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" class="dirB">
+        <defs>${sharedDefs}
+          <filter id="${p}hammer" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="2" result="n"/><feDiffuseLighting in="n" surfaceScale="2.2" lighting-color="#fff"><feDistantLight azimuth="235" elevation="52"/></feDiffuseLighting></filter>
+          <linearGradient id="${p}plateSh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient>
+          <linearGradient id="${p}btnSh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient>
+          <radialGradient id="${p}glow" cx=".5" cy=".9" r=".9"><stop offset="0" class="glowstop" stop-opacity=".7"/><stop offset="1" class="glowstop" stop-opacity="0"/></radialGradient>
+          <linearGradient id="${p}glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".26"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <radialGradient id="${p}vignette" cx=".5" cy=".5" r=".75"><stop offset=".65" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></radialGradient>
+        </defs>
+        <rect width="${W}" height="${H}" class="plate"/>
+        <rect width="${W}" height="${H}" filter="url(#${p}hammer)" opacity=".42" style="mix-blend-mode:multiply"/>
+        <rect width="${W}" height="${H}" fill="url(#${p}plateSh)"/>
+        ${[38, H - 38].map(y => `<rect x="12" y="${y - 7}" width="24" height="14" rx="7" fill="#0b0c0d"/><rect x="${W - 36}" y="${y - 7}" width="24" height="14" rx="7" fill="#0b0c0d"/>`).join("")}
+        <line x1="48" y1="0" x2="48" y2="${H}" stroke="#000" stroke-opacity=".35"/><line x1="${W - 48}" y1="0" x2="${W - 48}" y2="${H}" stroke="#000" stroke-opacity=".35"/>
+        <line x1="49" y1="0" x2="49" y2="${H}" stroke="#fff" stroke-opacity=".12"/><line x1="${W - 47}" y1="0" x2="${W - 47}" y2="${H}" stroke="#fff" stroke-opacity=".12"/>
+
+        <rect x="70" y="22" width="660" height="26" rx="2" class="strip"/>
+        <text x="84" y="39.5" class="t-legend t-strip" font-size="11" font-weight="600" letter-spacing="5">VIBETRON</text>
+        <text x="190" y="39.5" class="t-legend t-strip" font-size="8" letter-spacing="2.6" opacity=".7">TYPE VT-369 · PROGRAMME ENHANCER · 0 VU = −18 dBFS</text>
+        <circle cx="712" cy="35" r="3.2" class="pgm"/><text x="702" y="38" text-anchor="end" class="t-legend t-strip" font-size="7" letter-spacing="2" opacity=".7">PGM</text>
+
+        ${meter(p, 0, 82, 78, 200, 150, mopts)}
+        ${meter(p, 1, 312, 78, 200, 150, mopts)}
+        ${btns}
+
+        <g transform="translate(88 262) rotate(-0.7)">
+          <rect x="3" y="5" width="630" height="112" fill="#000" opacity=".3"/>
+          <rect width="630" height="112" class="card"/>
+          ${[34, 52, 70, 88, 106].map(y => `<line x1="0" y1="${y}" x2="630" y2="${y}" stroke="#7fa5c9" stroke-opacity=".35" stroke-width=".7"/>`).join("")}
+          <line x1="0" y1="22" x2="630" y2="22" stroke="#d2574f" stroke-opacity=".55" stroke-width=".8"/>
+          <rect x="270" y="-9" width="90" height="20" fill="#f3efdf" opacity=".62" transform="rotate(2 315 1)"/>
+          <foreignObject x="16" y="4" width="600" height="106">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="notesB">
+              <div class="nhead"><span class="nname">Silk</span><span class="nnum">MODE I · PROGRAMME NOTES</span></div>
+              <p class="ntext"></p>
+            </div>
+          </foreignObject>
+        </g>
+        ${grain(W, H, .07)}
+      </svg>`;
+    },
+    css() {
+      return `.dirB .plate{fill:var(--plate);transition:fill .6s} .dirB .strip{fill:var(--strip)} .dirB .t-strip{fill:var(--stripInk)}
+        .dirB .t-legend{font-family:var(--legend)} .dirB .t-mono{font-family:var(--mono)} .dirB .t-ink{fill:var(--ink)} .dirB .t-sub{fill:var(--sub)} .dirB .readout{fill:var(--lamp)}
+        .dirB .m-face{fill:var(--face)} .dirB .glowstop{stop-color:var(--glow)}
+        .dirB .m-ink{stroke:var(--mink)} .dirB .m-inkt{fill:var(--mink);font-family:var(--legend)} .dirB .m-red{stroke:var(--red)} .dirB .m-redt{fill:var(--red);font-family:var(--legend)}
+        .dirB .m-vu{font-family:var(--legend);font-weight:600;letter-spacing:2px} .dirB .m-needle{stroke:var(--needle)}
+        .dirB .peak{fill:#3a1410} .dirB .peak.on{fill:#ff3b24;filter:drop-shadow(0 0 4px #ff3b24)}
+        .dirB .pgm{fill:var(--lamp);filter:drop-shadow(0 0 4px var(--lamp))} .dirB .t-legend.t-ink,.dirB .t-legend.t-sub{filter:drop-shadow(0 .7px 0 rgba(255,255,255,.2))} .dirB .btn{fill:#3b3f42;transition:fill .25s} .dirB .btn.on{fill:var(--lamp);filter:drop-shadow(0 0 10px var(--lamp))}
+        .dirB .btxt{fill:#9aa0a3} .dirB .btxt.on{fill:#1b1a17}
+        .dirB .card{fill:var(--card)}
+        .dirB .notesB{font-family:var(--script);color:#2a2620} .dirB .nhead{display:flex;align-items:baseline;gap:12px;height:20px}
+        .dirB .nname{font-style:italic;font-size:15px} .dirB .nnum{font-family:var(--legend);font-size:7px;letter-spacing:2.2px;color:#7a6f60}
+        .dirB .ntext{margin:0;font-size:11.2px;line-height:18px;font-style:italic;padding-top:2px}`;
+    },
+  };
+
+  // ---------- Direction C : Midnight Glass ----------
+  const midnight = {
+    themes: [
+      { glow: "#ffd48a", glowHi: "#fff1d2", legend: "#e5cc92", sub: "#8f8467", tick: "#fff3da" },
+      { glow: "#ff8f78", glowHi: "#ffe1d8", legend: "#efb9a4", sub: "#93736a", tick: "#ffece6" },
+      { glow: "#4fb9ff", glowHi: "#d9f1ff", legend: "#d9c08a", sub: "#7d8796", tick: "#e8f6ff" },
+    ],
+    build(p) {
+      const W = 800, H = 400;
+      const bez = (w, h) => `<rect x="-3" y="-3" width="${w + 6}" height="${h + 6}" rx="8" fill="#000"/><rect x="-3" y="-3" width="${w + 6}" height="${h + 6}" rx="8" fill="none" stroke="#fff" stroke-opacity=".08"/>`;
+      const mopts = { rx: 6, bezel: bez, label: ["LEFT CHANNEL", "RIGHT CHANNEL"] };
+      const kx = 676, ky = 160;
+      const KR = 42; // skirt radius
+      let knurl = "";
+      for (let i = 0; i < 120; i++) {
+        const a = i * 3, [x0, y0] = polar(kx, ky, KR - 5.5, a), [x1, y1] = polar(kx, ky, KR - 0.4, a);
+        const [x2, y2] = polar(kx, ky, KR - 5.5, a + 1.3), [x3, y3] = polar(kx, ky, KR - 0.4, a + 1.3);
+        knurl += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="#000" stroke-opacity=".6" stroke-width=".9"/><line x1="${x2}" y1="${y2}" x2="${x3}" y2="${y3}" stroke="#fff" stroke-opacity=".22" stroke-width=".55"/>`;
+      }
+      let scale = "";
+      for (let a = -46; a <= 46.01; a += 46 / 6) {
+        const major = Math.abs(a % 46) < 0.01;
+        const [x0, y0] = polar(kx, ky, 51, a), [x1, y1] = polar(kx, ky, major ? 56 : 54, a);
+        scale += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" class="scaletick" stroke-width="${major ? 1.2 : .7}"/>`;
+      }
+      let sel = "";
+      MODES.forEach((m, i) => {
+        const a = -46 + i * 46; const [lx, ly] = polar(kx, ky, 64, a);
+        const [tx, ty] = polar(kx, ky, 80, a);
+        sel += `<g class="hit" data-mode="${i}" tabindex="0" role="button" aria-label="Mode ${m.num} ${m.name}">
+          <circle cx="${tx}" cy="${ty}" r="18" fill="transparent" class="focusring"/>
+          <circle cx="${lx}" cy="${ly}" r="3" class="lamp" data-i="${i}"/>
+          <text x="${tx}" y="${ty + 4}" text-anchor="middle" class="t-legend t-leg" font-size="11" font-weight="500">${m.num}</text>
+        </g>`;
+      });
+      return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" class="dirC">
+        <defs>${sharedDefs}
+          <linearGradient id="${p}frame" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d6d6d4"/><stop offset=".5" stop-color="#6f7070"/><stop offset="1" stop-color="#c9c9c7"/></linearGradient>
+          <linearGradient id="${p}glassBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15171b"/><stop offset="1" stop-color="#050506"/></linearGradient>
+          <linearGradient id="${p}sheen" x1="0" y1="0" x2="1" y2=".6"><stop offset=".25" stop-color="#fff" stop-opacity="0"/><stop offset=".42" stop-color="#fff" stop-opacity=".07"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <radialGradient id="${p}glow" cx=".5" cy=".95" r=".9"><stop offset="0" class="glowstop" stop-opacity=".95"/><stop offset=".55" class="glowstop" stop-opacity=".45"/><stop offset="1" class="glowstop" stop-opacity=".08"/></radialGradient>
+          <linearGradient id="${p}glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+          <radialGradient id="${p}vignette" cx=".5" cy=".7" r=".8"><stop offset=".45" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".75"/></radialGradient>
+          <filter id="${p}soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
+          <linearGradient id="${p}seatLip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity=".22"/></linearGradient>
+          <radialGradient id="${p}skirt" cx=".45" cy=".4" r=".6"><stop offset="0" stop-color="#4b4f56"/><stop offset=".85" stop-color="#25282d"/><stop offset="1" stop-color="#0f1113"/></radialGradient>
+          <linearGradient id="${p}skirtLight" x1=".15" y1="0" x2=".55" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset=".42" stop-color="#fff" stop-opacity="0"/><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></linearGradient>
+          <linearGradient id="${p}chamfer" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#c3c6ca"/><stop offset="1" stop-color="#4d5054"/></linearGradient>
+          <radialGradient id="${p}dish" cx=".5" cy=".6" r=".62"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".72" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".32"/></radialGradient>
+          <radialGradient id="${p}spec"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="${W}" height="${H}" fill="url(#${p}frame)"/>
+        <rect x="8" y="8" width="${W - 16}" height="${H - 16}" rx="6" fill="url(#${p}glassBg)"/>
+        <rect x="8" y="8" width="${W - 16}" height="${H - 16}" rx="6" fill="url(#${p}sheen)"/>
+
+        ${meter(p, 0, 44, 50, 258, 150, mopts)}
+        ${meter(p, 1, 326, 50, 258, 150, mopts)}
+
+        ${sel}
+        ${scale}
+        <!-- static: seat and cast shadow -->
+        <g pointer-events="none">
+          <ellipse cx="${kx + 2}" cy="${ky + 9}" rx="45" ry="43" fill="#000" opacity=".75" filter="url(#${p}soft)"/>
+          <circle cx="${kx}" cy="${ky}" r="47.5" fill="#040405"/>
+          <circle cx="${kx}" cy="${ky}" r="47.5" fill="none" stroke="url(#${p}seatLip)" stroke-width="1"/>
+        </g>
+        <!-- rotating: grab target, anodised skirt, knurling -->
+        <g class="knob" data-cx="${kx}" data-cy="${ky}">
+          <circle cx="${kx}" cy="${ky}" r="46" fill="#000" fill-opacity="0.001"/>
+          <circle cx="${kx}" cy="${ky}" r="${KR}" fill="url(#${p}skirt)"/>
+          ${knurl}
+        </g>
+        <!-- static: lighting over the skirt, polished chamfer, spun face, dish, specular -->
+        <g pointer-events="none">
+          <circle cx="${kx}" cy="${ky}" r="${KR - 2.8}" fill="none" stroke="url(#${p}skirtLight)" stroke-width="5.8"/>
+          <circle cx="${kx}" cy="${ky}" r="${KR}" fill="none" stroke="#000" stroke-opacity=".7" stroke-width=".8"/>
+          <circle cx="${kx}" cy="${ky}" r="36.4" fill="url(#${p}chamfer)"/>
+          <circle cx="${kx}" cy="${ky}" r="36.4" fill="none" stroke="#000" stroke-opacity=".35" stroke-width=".5"/>
+          <path d="${arc(kx, ky, 35.6, 200, 262)}" fill="none" class="glowkiss" stroke-width="1.6" stroke-linecap="round"/>
+          <foreignObject x="${kx - 34.6}" y="${ky - 34.6}" width="69.2" height="69.2"><div xmlns="http://www.w3.org/1999/xhtml" class="spunface"></div></foreignObject>
+          <circle cx="${kx}" cy="${ky}" r="34.6" fill="url(#${p}dish)"/>
+          <circle cx="${kx}" cy="${ky}" r="34.6" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width=".5"/>
+          <ellipse cx="${kx - 11}" cy="${ky - 15}" rx="15" ry="7" fill="url(#${p}spec)" transform="rotate(-38 ${kx - 11} ${ky - 15})"/>
+        </g>
+        <!-- rotating: milled pointer groove and jewel -->
+        <g class="knob-spin" data-cx="${kx}" data-cy="${ky}" pointer-events="none">
+          <rect x="${kx - 1.7}" y="${ky - 29}" width="3.4" height="17" rx="1.7" fill="#17181a"/>
+          <rect x="${kx + 0.6}" y="${ky - 28.2}" width=".8" height="15.4" rx=".4" fill="#fff" fill-opacity=".55"/>
+          <circle cx="${kx}" cy="${ky - 31.2}" r="1.6" class="knob-jewel"/>
+        </g>
+        <text x="${kx}" y="${ky + 60}" text-anchor="middle" class="t-legend t-sub" font-size="7" letter-spacing="2.4">CHARACTER</text>
+
+        <line x1="44" y1="232" x2="${W - 44}" y2="232" class="rule"/>
+        <text x="44" y="258" class="t-legend t-leg" font-size="15" font-weight="500" letter-spacing="8">VIBETRON</text>
+        <text x="186" y="258" class="t-legend t-sub" font-size="7.5" letter-spacing="2.6">VT-369 · STEREO HARMONIC RESOLUTION AMPLIFIER</text>
+        <circle cx="${W - 110}" cy="255" r="3" class="lamp on"/><text x="${W - 44}" y="258" text-anchor="end" class="t-legend t-sub" font-size="7" letter-spacing="2.4">OPERATE</text>
+        <foreignObject x="44" y="272" width="${W - 88}" height="100">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="notesC">
+            <div class="nhead"><span class="nname">Silk</span><span class="nnum">MODE I</span></div>
+            <p class="ntext"></p>
+          </div>
+        </foreignObject>
+        ${grain(W, H, .06)}
+      </svg>`;
+    },
+    css() {
+      return `.dirC .t-legend{font-family:var(--legend)} .dirC .t-mono{font-family:var(--mono)} .dirC .t-leg{fill:var(--legend)} .dirC .t-sub{fill:var(--sub)} .dirC .readout{fill:var(--glowHi);opacity:.85}
+        .dirC .rule{stroke:var(--legend);stroke-opacity:.35}
+        .dirC .m-face{fill:#07080a} .dirC .glowstop{stop-color:var(--glow);transition:stop-color .6s}
+        .dirC .m-ink{stroke:var(--tick)} .dirC .m-inkt{fill:var(--tick);font-family:var(--legend)} .dirC .m-red{stroke:#ff5a45} .dirC .m-redt{fill:#ff6a55;font-family:var(--legend)}
+        .dirC .m-vu{font-family:var(--script);font-style:italic} .dirC .m-needle{stroke:#101010}
+        .dirC .peak{fill:#2a0d0a} .dirC .peak.on{fill:#ff3b24;filter:drop-shadow(0 0 5px #ff3b24)}
+        .dirC .lamp{fill:#222} .dirC .lamp.on{fill:var(--glow);filter:drop-shadow(0 0 5px var(--glow))}
+        .dirC .knob,.dirC .knob-spin{transition:transform .2s cubic-bezier(.2,.8,.3,1)} .dirC .knob{cursor:grab} .dirC.dragging .knob,.dirC.dragging .knob-spin{transition:none} .dirC.dragging .knob{cursor:grabbing}
+        .dirC .glowkiss{stroke:var(--glow);stroke-opacity:.55;filter:blur(.6px)} .dirC .scaletick{stroke:var(--legend);stroke-opacity:.55}
+        .dirC .knob-jewel{fill:var(--glowHi);filter:drop-shadow(0 0 2.5px var(--glow)) drop-shadow(0 0 1px var(--glow))}
+        .dirC .spunface{width:69.2px;height:69.2px;border-radius:50%;background:
+          repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.07) 0 .45px, rgba(0,0,0,.06) .45px 1.1px),
+          conic-gradient(from 18deg, #dcdee1, #8e9196 11%, #f5f6f7 24%, #a0a3a8 36%, #d2d5d9 49%, #85888d 61%, #f1f2f4 74%, #999ca2 87%, #dcdee1)}
+        .dirC .notesC{font-family:var(--legend);color:#cfc9bd} .dirC .nhead{display:flex;align-items:baseline;gap:12px;margin-bottom:2px}
+        .dirC .nname{font-family:var(--script);font-style:italic;font-size:17px;color:var(--legend)} .dirC .nnum{font-size:7px;letter-spacing:2.4px;color:var(--sub)}
+        .dirC .ntext{margin:0;font-size:10.4px;line-height:1.55;font-weight:300}`;
+    },
+  };
+
+  const DIRS = [["walnut", walnut], ["broadcast", broadcast], ["midnight", midnight]];
+  const style = document.createElement("style");
+  style.textContent = DIRS.map(([id, d]) => d.css(id)).join("\n");
+  document.head.appendChild(style);
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const units = [];
+
+  DIRS.forEach(([id, d], di) => {
+    const sec = document.getElementById(id);
+    const host = sec.querySelector(".unit");
+    host.innerHTML = d.build(id);
+    const svg = host.querySelector("svg");
+    svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", `${sec.querySelector("h2").textContent} plugin mockup`);
+    const chips = sec.querySelector(".chips");
+    MODES.forEach((m, i) => {
+      const b = document.createElement("button");
+      b.id = `${id}-mode-${i}`;
+      b.type = "button";
+      b.textContent = `${m.num} · ${m.name}`;
+      b.addEventListener("click", () => setMode(u, i));
+      chips.appendChild(b);
+    });
+    const u = {
+      id, d, svg, chips, mode: 0,
+      needles: [...svg.querySelectorAll(".needle")], shadows: [...svg.querySelectorAll(".needle-shadow")],
+      peaks: [...svg.querySelectorAll(".peak")],
+      ch: [0, 1].map(c => ({ p: 0, v: 0, env: 0, peakHold: 0, seed: di * 7 + c * 3.1 })),
+    };
+    svg.querySelectorAll(".hit").forEach(h => {
+      const go = () => setMode(u, +h.dataset.mode);
+      h.addEventListener("click", go);
+      h.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+    });
+    const knob = svg.querySelector(".knob");
+    if (knob) {
+      // Drag to turn: the knob follows the pointer between the end detents and snaps to the nearest one on release.
+      const step = id === "walnut" ? 52 : 46, min = -step, max = step;
+      const cx = +knob.dataset.cx, cy = +knob.dataset.cy;
+      knob.style.touchAction = "none";
+      // Linear drag like a studio plugin: up or right turns clockwise, a fixed distance per detent.
+      // Only the drag distance matters, not where on the knob you grab it.
+      const PX_PER_DETENT = 60;
+      let dragging = false, knobAngle = 0, startAngle = 0, startX = 0, startY = 0;
+      knob.addEventListener("pointerdown", e => {
+        dragging = true;
+        startAngle = knobAngle = min + u.mode * step;
+        startX = e.clientX; startY = e.clientY;
+        knob.setPointerCapture(e.pointerId);
+        svg.classList.add("dragging");
+        e.preventDefault();
+      });
+      knob.addEventListener("pointermove", e => {
+        if (!dragging) return;
+        if (e.buttons === 0) { release(); return; }  // the button came up somewhere we never heard about
+        const travel = (e.clientX - startX) - (e.clientY - startY);
+        knobAngle = Math.max(min, Math.min(max, startAngle + travel / PX_PER_DETENT * step));
+        const nearest = Math.round((knobAngle - min) / step);
+        if (nearest !== u.mode) setMode(u, nearest);
+        turnKnob(knob, knobAngle);
+      });
+      const release = () => {
+        if (!dragging) return;
+        dragging = false;
+        svg.classList.remove("dragging");
+        setMode(u, u.mode);
+      };
+      // End the drag on any sign the button is up: capture lost, released elsewhere, or the page lost focus.
+      knob.addEventListener("pointerup", release);
+      knob.addEventListener("pointercancel", release);
+      knob.addEventListener("lostpointercapture", release);
+      window.addEventListener("pointerup", release);
+      window.addEventListener("blur", release);
+    }
+    units.push(u);
+    setMode(u, di); // open each direction on a different mode so the page shows all three at rest
+  });
+
+  // Rotate knobs with a CSS angle about a fixed pivot. Transitioning an SVG rotate(a cx cy) attribute
+  // interpolates the whole matrix, which pushes the knob off-centre mid-animation.
+  function turnKnob(k, deg) {
+    k.style.transformBox = "view-box";
+    k.style.transformOrigin = `${k.dataset.cx}px ${k.dataset.cy}px`;
+    k.style.transform = `rotate(${deg}deg)`;
+    k.ownerSVGElement.querySelectorAll(".knob-spin").forEach(el => {
+      el.style.transformBox = "view-box";
+      el.style.transformOrigin = k.style.transformOrigin;
+      el.style.transform = k.style.transform;
+    });
+  }
+
+  function setMode(u, i) {
+    u.mode = i;
+    const t = u.d.themes[i], m = MODES[i];
+    Object.entries(t).forEach(([k, v]) => u.svg.style.setProperty(`--${k}`, v));
+    u.svg.querySelectorAll(".modeName").forEach(e => e.textContent = m.name);
+    u.svg.querySelectorAll(".nname").forEach(e => e.textContent = m.name);
+    u.svg.querySelectorAll(".nnum").forEach(e => e.textContent = u.id === "broadcast" ? `MODE ${m.num} · PROGRAMME NOTES` : `MODE ${m.num} · ${m.tag}`);
+    u.svg.querySelectorAll(".ntext").forEach(e => e.textContent = m.text);
+    u.svg.querySelectorAll("[data-i]").forEach(e => e.classList.toggle("on", +e.dataset.i === i));
+    const k = u.svg.querySelector(".knob");
+    if (k) turnKnob(k, u.id === "walnut" ? -52 + i * 52 : -46 + i * 46);
+    [...u.chips.children].forEach((b, j) => b.setAttribute("aria-pressed", String(j === i)));
+  }
+
+  // ---------- simulated programme + VU ballistics ----------
+  // 2nd-order needle: zeta ≈ 0.81, wn ≈ 13.5 rad/s → ~300 ms to 99%, ~1.5% overshoot (IEC 60268-17).
+  const WN = 13.5, Z = 0.81;
+  const noise = (x) => Math.sin(x * 1.7) * .5 + Math.sin(x * 0.63 + 1.3) * .3 + Math.sin(x * 3.1 + .4) * .2;
+  let last = performance.now();
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    const t = now / 1000;
+    units.forEach(u => {
+      const gain = MODES[u.mode].gain;
+      u.ch.forEach((c, ci) => {
+        const beat = (t * 2.05 + c.seed * 0.01) % 1;              // ~123 bpm kick
+        const kick = Math.exp(-beat * 7) * 4.5;
+        const dbfs = -21.5 + 3.2 * noise(t * 0.55 + c.seed) + kick + gain;
+        const target = reduce ? posOf(-3) : Math.min(1.12, posOf(dbfs + 18));
+        const steps = 4, h = dt / steps;
+        for (let s = 0; s < steps; s++) { const a = WN * WN * (target - c.p) - 2 * Z * WN * c.v; c.v += a * h; c.p += c.v * h; }
+        c.p = Math.max(-0.03, Math.min(1.1, c.p));
+        const ang = angOf(c.p);
+        const n = u.needles[ci], sh = u.shadows[ci];
+        n.setAttribute("transform", `rotate(${ang.toFixed(2)} ${n.dataset.cx} ${n.dataset.cy})`);
+        sh.setAttribute("transform", `translate(3 4) rotate(${ang.toFixed(2)} ${sh.dataset.cx} ${sh.dataset.cy})`);
+        if (dbfs + 18 > 1.2) c.peakHold = 0.35; else c.peakHold -= dt;
+        u.peaks[ci].classList.toggle("on", c.peakHold > 0);
+      });
+    });
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
