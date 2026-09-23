@@ -64,7 +64,7 @@
   <header>
     <div class="eyebrow">Design review · AU / VST3</div>
     <h1>Vibetron <b>VT-369</b></h1>
-    <p>Here are three hardware directions for the plugin, shown as live mockups. The needles run on VU ballistics driven by simulated programme material. Switch modes on any unit to see its theme. Each mode reskins the whole faceplate and loads its own liner notes.</p>
+    <p>The current Midnight Glass design, followed by the two directions explored before it. Each unit is a live mockup: the needles run on the plugin's ballistics, driven by simulated programme material. Switch modes on any unit to see its theme and liner notes.</p>
     <div class="modes" aria-label="Operating modes">
       <div><span class="t">MODE I</span><span class="n">Silk</span><span class="g">air · openness</span></div>
       <div><span class="t">MODE II</span><span class="n">Velvet</span><span class="g">warmth · density</span></div>
@@ -72,9 +72,23 @@
     </div>
   </header>
 
+  <section class="dir" id="midnight">
+    <div class="dir-head">
+      <h2><span>Current design</span>Midnight Glass</h2>
+      <p>The shipping VT-369: a black glass fascia with gold legends, glowing meters and a machined knob. Try VU CAL, OPERATE and TAME; they behave like the plugin.</p>
+    </div>
+    <div class="unit"></div>
+    <div class="chips" role="group" aria-label="Midnight mode"></div>
+    <div class="notes">
+      <div><b>Knob:</b> machined aluminium with knurled skirt and spun face. Drag up/right to turn, or click a numeral.</div>
+      <div><b>VU CAL:</b> 0 VU reference (−24 to 0 dBFS), rise, fall and overshoot, and a VU or PEAK needle. The PEAK lamps light above the reference.</div>
+      <div><b>OPERATE / TAME:</b> OPERATE engages the mode; OUTPUT TAME is a −0.1 dBTP true-peak limiter with no gain-reduction display.</div>
+    </div>
+  </section>
+
   <section class="dir" id="walnut">
     <div class="dir-head">
-      <h2><span>Direction A</span>Walnut &amp; Brass</h2>
+      <h2><span>Explored direction</span>Walnut &amp; Brass</h2>
       <p>1970s studio outboard: oiled walnut cheeks, a brushed faceplate, backlit paper meters and a chicken-head selector. The faceplate lacquer changes per mode.</p>
     </div>
     <div class="unit"></div>
@@ -87,7 +101,7 @@
 
   <section class="dir" id="broadcast">
     <div class="dir-head">
-      <h2><span>Direction B</span>Broadcast Console</h2>
+      <h2><span>Explored direction</span>Broadcast Console</h2>
       <p>A 1960s transmission-desk module: hammertone enamel, rack ears, illuminated push-buttons, and the mode notes on a taped index card.</p>
     </div>
     <div class="unit"></div>
@@ -99,23 +113,9 @@
     </div>
   </section>
 
-  <section class="dir" id="midnight">
-    <div class="dir-head">
-      <h2><span>Direction C</span>Midnight Glass</h2>
-      <p>A flagship hi-fi amplifier after dark: a black glass fascia, gold legends, and meters glowing through smoked glass.</p>
-    </div>
-    <div class="unit"></div>
-    <div class="chips" role="group" aria-label="Midnight mode"></div>
-    <div class="notes">
-      <div><b>Feel:</b> luxurious, cinematic, most modern of the three.</div>
-      <div><b>Mode cue:</b> meter glow shifts warm gold → rose → sapphire.</div>
-      <div><b>Tradeoff:</b> relies on glow, so it needs a dark DAW theme to shine.</div>
-      <div><b>Built:</b> this is the direction implemented in the plugin, including the machined knob.</div>
-    </div>
-  </section>
 
   <footer>
-    Meters are calibrated to <code>0 VU = −18 dBFS</code> (switchable to −14 or −20), with 300 ms integration and about 1.5% overshoot. Surfaces use brushed metal, walnut, paper and film grain throughout.
+    Meters default to <code>0 VU = −18 dBFS</code>, 300 ms to 99% and 1.5% overshoot. A steady tone reads at its peak level. All of this can be changed from VU CAL on the current design.
   </footer>
 </div>
 
@@ -422,6 +422,8 @@
           <linearGradient id="${p}chamfer" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#c3c6ca"/><stop offset="1" stop-color="#4d5054"/></linearGradient>
           <radialGradient id="${p}dish" cx=".5" cy=".6" r=".62"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".72" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".32"/></radialGradient>
           <radialGradient id="${p}spec"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <linearGradient id="tameOff" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2d32"/><stop offset="1" stop-color="#0d0e10"/></linearGradient>
+          <linearGradient id="tameOn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#111215"/><stop offset="1" stop-color="#1c1e22"/></linearGradient>
         </defs>
         <rect width="${W}" height="${H}" fill="url(#${p}frame)"/>
         <rect x="8" y="8" width="${W - 16}" height="${H - 16}" rx="6" fill="url(#${p}glassBg)"/>
@@ -462,16 +464,63 @@
           <rect x="${kx + 0.6}" y="${ky - 28.2}" width=".8" height="15.4" rx=".4" fill="#fff" fill-opacity=".55"/>
           <circle cx="${kx}" cy="${ky - 31.2}" r="1.6" class="knob-jewel"/>
         </g>
-        <text x="${kx}" y="${ky + 60}" text-anchor="middle" class="t-legend t-sub" font-size="7" letter-spacing="2.4">CHARACTER</text>
+        <text x="${kx}" y="${ky + 66}" text-anchor="middle" class="t-legend t-sub" font-size="7" letter-spacing="2.4">CHARACTER</text>
 
-        <line x1="44" y1="232" x2="${W - 44}" y2="232" class="rule"/>
+        <!-- OPERATE: centred under CHARACTER; toggles the mode gain -->
+        <g class="opbtn" tabindex="0" role="button" aria-label="Operate">
+          <rect x="626" y="236" width="100" height="16" fill="transparent"/>
+          <circle cx="647.5" cy="244" r="8" class="oplamp-glow"/>
+          <circle cx="647.5" cy="244" r="3" class="oplamp"/>
+          <text x="658.5" y="246.5" class="t-legend oplabel" font-size="7" letter-spacing="2.4">OPERATE</text>
+        </g>
+
+        <!-- OUTPUT TAME: centred under the knob -->
+        <g class="tamebtn" tabindex="0" role="button" aria-label="Output tame">
+          <text x="676" y="306" text-anchor="middle" class="t-legend t-sub" font-size="6.5" letter-spacing="2.2">OUTPUT</text>
+          <rect x="637.5" y="309.5" width="77" height="25" rx="5" fill="#000"/>
+          <rect x="639" y="311" width="74" height="22" rx="4" class="tamecap"/>
+          <rect x="639" y="311" width="74" height="22" rx="4" class="tameglow"/>
+          <line x1="643" y1="311.8" x2="709" y2="311.8" class="tamecatch" stroke-width=".8"/>
+          <circle cx="651" cy="322" r="7" class="tameled-glow"/>
+          <circle cx="651" cy="322" r="2.5" class="tameled"/>
+          <text x="682" y="325.2" text-anchor="middle" class="t-legend tamelabel" font-size="9" letter-spacing="2.7">TAME</text>
+        </g>
+
+        <!-- VU CAL pill between the meters -->
+        <g class="calbtn" tabindex="0" role="button" aria-label="Meter calibration">
+          <rect x="226" y="205" width="176" height="18" fill="transparent"/>
+          <rect x="231" y="206.5" width="46" height="15" rx="7.5" class="calpill"/>
+          <text x="254" y="216.3" text-anchor="middle" class="t-legend calpilltext" font-size="6.5" letter-spacing="1.4">VU CAL</text>
+          <text x="287" y="216.5" class="t-legend t-sub calref" font-size="7" letter-spacing="2.1">0 VU = −18 dBFS</text>
+        </g>
+
+        <line x1="44" y1="232" x2="584" y2="232" class="rule"/>
         <text x="44" y="258" class="t-legend t-leg" font-size="15" font-weight="500" letter-spacing="8">VIBETRON</text>
         <text x="186" y="258" class="t-legend t-sub" font-size="7.5" letter-spacing="2.6">VT-369 · STEREO HARMONIC RESOLUTION AMPLIFIER</text>
-        <circle cx="${W - 110}" cy="255" r="3" class="lamp on"/><text x="${W - 44}" y="258" text-anchor="end" class="t-legend t-sub" font-size="7" letter-spacing="2.4">OPERATE</text>
-        <foreignObject x="44" y="272" width="${W - 88}" height="100">
+        <foreignObject x="44" y="272" width="540" height="100">
           <div xmlns="http://www.w3.org/1999/xhtml" class="notesC">
             <div class="nhead"><span class="nname">Silk</span><span class="nnum">MODE I</span></div>
             <p class="ntext"></p>
+          </div>
+        </foreignObject>
+
+        <!-- Meter calibration panel (VU CAL) -->
+        <foreignObject x="44" y="242" width="540" height="142" class="calfo" style="display:none">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="cp">
+            <div class="cp-head">
+              <span class="cp-title">METER CALIBRATION</span>
+              <span class="cp-lbl">NEEDLE</span>
+              <button type="button" class="pill" data-needle="vu">VU</button>
+              <button type="button" class="pill" data-needle="peak">PEAK</button>
+              <span class="cp-sp"></span>
+              <button type="button" class="pill" data-act="reset">RESET TO DEFAULTS</button>
+              <button type="button" class="pill" data-act="done">DONE</button>
+            </div>
+            <div class="cp-row" data-row="ref"><span class="lbl">0 VU REFERENCE</span><input type="range" min="0" max="1000" step="1" aria-label="0 VU reference"/><span class="val"></span>
+              <span class="presets"><button type="button" class="pill" data-ref="-20">−20</button><button type="button" class="pill" data-ref="-18">−18</button><button type="button" class="pill" data-ref="-14">−14</button><button type="button" class="pill" data-ref="0">0 dBFS</button></span></div>
+            <div class="cp-row" data-row="rise"><span class="lbl">RISE TIME</span><input type="range" min="0" max="1000" step="1" aria-label="Rise time"/><span class="val"></span><span class="hint"></span></div>
+            <div class="cp-row" data-row="fall"><span class="lbl">FALL TIME</span><input type="range" min="0" max="1000" step="1" aria-label="Fall time"/><span class="val"></span><span class="hint"></span></div>
+            <div class="cp-row" data-row="overshoot"><span class="lbl">OVERSHOOT</span><input type="range" min="0" max="1000" step="1" aria-label="Overshoot"/><span class="val"></span><span class="hint"></span></div>
           </div>
         </foreignObject>
         ${grain(W, H, .06)}
@@ -493,9 +542,112 @@
           conic-gradient(from 18deg, #dcdee1, #8e9196 11%, #f5f6f7 24%, #a0a3a8 36%, #d2d5d9 49%, #85888d 61%, #f1f2f4 74%, #999ca2 87%, #dcdee1)}
         .dirC .notesC{font-family:var(--legend);color:#cfc9bd} .dirC .nhead{display:flex;align-items:baseline;gap:12px;margin-bottom:2px}
         .dirC .nname{font-family:var(--script);font-style:italic;font-size:17px;color:var(--legend)} .dirC .nnum{font-size:7px;letter-spacing:2.4px;color:var(--sub)}
-        .dirC .ntext{margin:0;font-size:10.4px;line-height:1.55;font-weight:300}`;
+        .dirC .ntext{margin:0;font-size:10.4px;line-height:1.55;font-weight:300}
+        .dirC .opbtn,.dirC .tamebtn,.dirC .calbtn{cursor:pointer} .dirC .opbtn:focus-visible,.dirC .tamebtn:focus-visible,.dirC .calbtn:focus-visible{outline:none}
+        .dirC .oplamp{fill:var(--glow);filter:drop-shadow(0 0 4px var(--glow))} .dirC .oplamp-glow{fill:var(--glow);opacity:.18}
+        .dirC .oplabel{fill:var(--legend)}
+        .dirC.bypassed .oplamp{fill:#222;filter:none} .dirC.bypassed .oplamp-glow{opacity:0} .dirC.bypassed .oplabel{fill:var(--sub);opacity:.6}
+        .dirC .tamecap{fill:url(#tameOff)} .dirC .tameglow{fill:var(--glow);opacity:0} .dirC .tamecatch{stroke:#fff;stroke-opacity:.14}
+        .dirC .tameled{fill:#222} .dirC .tameled-glow{fill:var(--glow);opacity:0} .dirC .tamelabel{fill:var(--sub)}
+        .dirC.tame .tamecap{fill:url(#tameOn)} .dirC.tame .tameglow{opacity:.1} .dirC.tame .tamecatch{stroke-opacity:.05}
+        .dirC.tame .tameled{fill:var(--glow);filter:drop-shadow(0 0 3px var(--glow))} .dirC.tame .tameled-glow{opacity:.25} .dirC.tame .tamelabel{fill:var(--legend)}
+        .dirC .calpill{fill:rgba(255,255,255,.03);stroke:var(--legend);stroke-opacity:.4;stroke-width:.8} .dirC .calpilltext{fill:var(--legend)}
+        .dirC.calopen .calpill{fill:var(--glow);fill-opacity:.18;stroke:var(--glow);stroke-opacity:.85} .dirC.calopen .calpilltext{fill:var(--glowHi)}
+        .dirC .cp{box-sizing:border-box;width:540px;height:142px;padding:8px 16px 0;border-radius:6px;font-family:"Jost",Futura,"Avenir Next",sans-serif;
+          background:linear-gradient(#121418f4,#070809f8);border:.8px solid color-mix(in srgb,var(--legend) 28%,transparent);box-shadow:0 3px 0 1px #0000008c}
+        .dirC .cp-head{display:flex;align-items:center;gap:5px;height:16px;padding-bottom:6px;border-bottom:.6px solid color-mix(in srgb,var(--legend) 20%,transparent);margin-bottom:6px}
+        .dirC .cp-title{font-size:8px;letter-spacing:3.2px;color:var(--legend);margin-right:14px;white-space:nowrap} .dirC .cp-lbl{font-size:6.5px;letter-spacing:1.95px;color:var(--sub);margin-right:3px}
+        .dirC .cp-sp{flex:1}
+        .dirC .pill{all:unset;box-sizing:border-box;height:16px;padding:0 11px;border-radius:8px;font-family:"Jost",Futura,"Avenir Next",sans-serif;font-size:6.5px;font-weight:500;line-height:16px;letter-spacing:1.43px;white-space:nowrap;cursor:pointer;
+          color:var(--legend);background:rgba(255,255,255,.03);border:.8px solid color-mix(in srgb,var(--legend) 30%,transparent);text-align:center}
+        .dirC .pill.lit{color:var(--glowHi);background:color-mix(in srgb,var(--glow) 16%,transparent);border-color:color-mix(in srgb,var(--glow) 80%,transparent)}
+        .dirC .pill:focus-visible{border-color:var(--legend)}
+        .dirC .cp-row{display:grid;grid-template-columns:92px 1fr 50px 176px;align-items:center;column-gap:8px;height:20px;margin-bottom:5px}
+        .dirC .cp-row .lbl{font-size:6.5px;letter-spacing:1.95px;color:var(--sub)} .dirC .cp-row .val{font-size:7.5px;letter-spacing:.9px;color:var(--legend);text-align:right}
+        .dirC .cp-row .val.changed{color:var(--glowHi)} .dirC .cp-row .hint{font-size:6px;letter-spacing:1.2px;color:var(--sub);padding-left:10px}
+        .dirC .cp-row.off .lbl,.dirC .cp-row.off input,.dirC .cp-row.off .val{opacity:.35}
+        .dirC .presets{display:flex;gap:6px;justify-content:flex-end} .dirC .presets .pill{width:38px;padding:0}
+        .dirC .cp input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:12px;background:transparent;margin:0;cursor:ew-resize}
+        .dirC .cp input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(90deg,color-mix(in srgb,var(--glow) 75%,transparent) var(--fill,50%),#000c var(--fill,50%))}
+        .dirC .cp input[type=range]::-moz-range-track{height:3px;border-radius:2px;background:linear-gradient(90deg,color-mix(in srgb,var(--glow) 75%,transparent) var(--fill,50%),#000c var(--fill,50%))}
+        .dirC .cp input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;margin-top:-4px;border-radius:50%;border:1px solid #1b1d21;box-shadow:0 1.5px 1px #0009;
+          background:conic-gradient(from 18deg,#dcdee1,#8e9196 11%,#f5f6f7 24%,#a0a3a8 36%,#d2d5d9 49%,#85888d 61%,#f1f2f4 74%,#999ca2 87%,#dcdee1)}
+        .dirC .cp input[type=range]::-moz-range-thumb{width:10px;height:10px;border-radius:50%;border:1px solid #1b1d21;
+          background:conic-gradient(from 18deg,#dcdee1,#8e9196 11%,#f5f6f7 24%,#a0a3a8 36%,#d2d5d9 49%,#85888d 61%,#f1f2f4 74%,#999ca2 87%,#dcdee1)}
+        .dirC .cp input[type=range]:focus-visible{outline:none} .dirC .cp input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 2px color-mix(in srgb,var(--glow) 70%,transparent)}`;
     },
   };
+
+  // ---------- meter calibration (same model and slider mapping as the plugin) ----------
+  const CAL_DEFAULT = { ref: -18, rise: 300, fall: 300, overshoot: 1.5, peak: false };
+  function ballisticsFrom(riseMs, fallMs, osPct) {
+    const os = Math.min(0.3, osPct / 100);
+    const z = os < 1e-4 ? 1 : -Math.log(os) / Math.sqrt(Math.PI ** 2 + Math.log(os) ** 2);
+    let y = 0, v = 0, t = 0; const h = 1e-3;
+    while (y < 0.99 && t < 100) { v += (1 - y - 2 * z * v) * h; y += v * h; t += h; }
+    return { z, wnRise: t / (Math.max(5, riseMs) / 1000), wnFall: t / (Math.max(5, fallMs) / 1000) };
+  }
+  const ballistics = (cal) => cal.peak ? ballisticsFrom(10, 40, 0) : ballisticsFrom(cal.rise, cal.fall, cal.overshoot);
+  const minusSign = "\u2212";
+  const fmtDb = v => (v < 0 ? minusSign + (-v) : String(v)) + " dBFS";
+  // Rise/fall/overshoot tracks are skewed so the default sits mid-track; the reference is linear.
+  const SLIDERS = {
+    ref:       { min: -24, max: 0,    step: 1,   def: CAL_DEFAULT.ref,       skew: false, fmt: fmtDb },
+    rise:      { min: 50,  max: 1000, step: 10,  def: CAL_DEFAULT.rise,      skew: true,  fmt: v => Math.round(v) + " ms", hint: ["TO 99% OF A STEP", "FIXED IN PEAK MODE"] },
+    fall:      { min: 50,  max: 2000, step: 10,  def: CAL_DEFAULT.fall,      skew: true,  fmt: v => Math.round(v) + " ms", hint: ["BACK DOWN 99%", "PEAK FALLS 20 dB / 1.7 s"] },
+    overshoot: { min: 0,   max: 10,   step: 0.1, def: CAL_DEFAULT.overshoot, skew: true,  fmt: v => v.toFixed(1) + " %",   hint: ["SWING PAST TARGET", "NO OVERSHOOT"] },
+  };
+  Object.values(SLIDERS).forEach(d => d.k = d.skew ? Math.log(0.5) / Math.log((d.def - d.min) / (d.max - d.min)) : 1);
+  const toProp = (d, v) => Math.pow(Math.min(1, Math.max(0, (v - d.min) / (d.max - d.min))), d.k);
+  const fromProp = (d, p) => { const v = d.min + (d.max - d.min) * Math.pow(Math.min(1, Math.max(0, p)), 1 / d.k); return Math.round(v / d.step) * d.step; };
+
+  function wireFacePlate(u) {
+    const svg = u.svg, panel = svg.querySelector(".calfo");
+    if (!panel) return;
+    const key = (el, fn) => { el.addEventListener("click", fn); el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fn(); } }); };
+    key(svg.querySelector(".opbtn"), () => { u.operate = !u.operate; svg.classList.toggle("bypassed", !u.operate); });
+    key(svg.querySelector(".tamebtn"), () => svg.classList.toggle("tame"));
+    const setOpen = open => { panel.style.display = open ? "" : "none"; svg.classList.toggle("calopen", open); };
+    key(svg.querySelector(".calbtn"), () => setOpen(panel.style.display === "none"));
+
+    const render = () => {
+      const c = u.cal;
+      u.ball = ballistics(c);
+      Object.entries(SLIDERS).forEach(([name, d]) => {
+        const row = panel.querySelector(`[data-row="${name}"]`), input = row.querySelector("input"), val = row.querySelector(".val");
+        const p = toProp(d, c[name]);
+        input.value = Math.round(p * 1000);
+        input.style.setProperty("--fill", (p * 100).toFixed(1) + "%");
+        val.textContent = d.fmt(c[name]);
+        val.classList.toggle("changed", Math.abs(c[name] - d.def) > d.step / 2);
+        if (d.hint) { row.querySelector(".hint").textContent = d.hint[c.peak ? 1 : 0]; row.classList.toggle("off", c.peak); input.disabled = c.peak; }
+      });
+      panel.querySelectorAll("[data-ref]").forEach(b => b.classList.toggle("lit", +b.dataset.ref === c.ref));
+      panel.querySelector('[data-needle="vu"]').classList.toggle("lit", !c.peak);
+      panel.querySelector('[data-needle="peak"]').classList.toggle("lit", c.peak);
+      svg.querySelector(".calref").textContent = (c.peak ? "PEAK  " : "") + "0 VU = " + fmtDb(c.ref);
+      svg.querySelectorAll(".m-vu").forEach(t => t.textContent = c.peak ? "PEAK" : "VU");
+    };
+    Object.entries(SLIDERS).forEach(([name, d]) => {
+      const input = panel.querySelector(`[data-row="${name}"] input`);
+      let fine = false;
+      input.addEventListener("pointerdown", e => fine = e.shiftKey);
+      input.addEventListener("input", () => {
+        const p = input.value / 1000;
+        let v = fromProp(d, p);
+        if (!fine && Math.abs(p - toProp(d, d.def)) < 0.02) v = d.def;   // gentle detent at the default
+        u.cal[name] = +v.toFixed(2);
+        render();
+      });
+      input.addEventListener("dblclick", () => { u.cal[name] = d.def; render(); });
+    });
+    panel.querySelectorAll("[data-ref]").forEach(b => b.addEventListener("click", () => { u.cal.ref = +b.dataset.ref; render(); }));
+    panel.querySelector('[data-needle="vu"]').addEventListener("click", () => { u.cal.peak = false; render(); });
+    panel.querySelector('[data-needle="peak"]').addEventListener("click", () => { u.cal.peak = true; render(); });
+    panel.querySelector('[data-act="reset"]').addEventListener("click", () => { u.cal = { ...CAL_DEFAULT }; render(); });
+    panel.querySelector('[data-act="done"]').addEventListener("click", () => setOpen(false));
+    render();
+  }
 
   const DIRS = [["walnut", walnut], ["broadcast", broadcast], ["midnight", midnight]];
   const style = document.createElement("style");
@@ -525,7 +677,8 @@
       id, d, svg, chips, mode: 0,
       needles: [...svg.querySelectorAll(".needle")], shadows: [...svg.querySelectorAll(".needle-shadow")],
       peaks: [...svg.querySelectorAll(".peak")],
-      ch: [0, 1].map(c => ({ p: 0, v: 0, env: 0, peakHold: 0, seed: di * 7 + c * 3.1 })),
+      ch: [0, 1].map(c => ({ p: 0, v: 0, env: 0, peakEnv: -100, peakHold: 0, seed: di * 7 + c * 3.1 })),
+      cal: { ...CAL_DEFAULT }, ball: ballistics(CAL_DEFAULT), operate: true,
     };
     svg.querySelectorAll(".hit").forEach(h => {
       const go = () => setMode(u, +h.dataset.mode);
@@ -572,6 +725,7 @@
       window.addEventListener("pointerup", release);
       window.addEventListener("blur", release);
     }
+    wireFacePlate(u);
     units.push(u);
     setMode(u, di); // open each direction on a different mode so the page shows all three at rest
   });
@@ -603,29 +757,34 @@
     [...u.chips.children].forEach((b, j) => b.setAttribute("aria-pressed", String(j === i)));
   }
 
-  // ---------- simulated programme + VU ballistics ----------
-  // 2nd-order needle: zeta ≈ 0.81, wn ≈ 13.5 rad/s → ~300 ms to 99%, ~1.5% overshoot (IEC 60268-17).
-  const WN = 13.5, Z = 0.81;
+  // ---------- simulated programme + needle ballistics (mirrors the plugin's MeterSettings / Ballistics) ----------
   const noise = (x) => Math.sin(x * 1.7) * .5 + Math.sin(x * 0.63 + 1.3) * .3 + Math.sin(x * 3.1 + .4) * .2;
   let last = performance.now();
   function frame(now) {
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
     const t = now / 1000;
     units.forEach(u => {
-      const gain = MODES[u.mode].gain;
+      const gain = u.operate ? MODES[u.mode].gain : 0;
+      const b = u.ball, cal = u.cal;
       u.ch.forEach((c, ci) => {
         const beat = (t * 2.05 + c.seed * 0.01) % 1;              // ~123 bpm kick
         const kick = Math.exp(-beat * 7) * 4.5;
-        const dbfs = -21.5 + 3.2 * noise(t * 0.55 + c.seed) + kick + gain;
-        const target = reduce ? posOf(-3) : Math.min(1.12, posOf(dbfs + 18));
-        const steps = 4, h = dt / steps;
-        for (let s = 0; s < steps; s++) { const a = WN * WN * (target - c.p) - 2 * Z * WN * c.v; c.v += a * h; c.p += c.v * h; }
+        const dbfs = -21.5 + 3.2 * noise(t * 0.55 + c.seed) + kick + gain;   // tone-equivalent average level
+        const peakDb = dbfs + 3 + Math.random() * 1.5;                        // sample peaks ride above the average
+        c.peakEnv = Math.max(peakDb, c.peakEnv - (20 / 1.7) * dt);           // peak needle falls 20 dB / 1.7 s
+        const level = cal.peak ? c.peakEnv : dbfs;
+        const target = reduce ? posOf(-3) : Math.min(1.12, posOf(level - cal.ref));
+        const steps = Math.min(64, Math.max(4, Math.ceil(Math.max(b.wnRise, b.wnFall) * dt * 4))), h = dt / steps;
+        for (let s = 0; s < steps; s++) {
+          const wn = target >= c.p ? b.wnRise : b.wnFall;
+          const acc = wn * wn * (target - c.p) - 2 * b.z * wn * c.v; c.v += acc * h; c.p += c.v * h;
+        }
         c.p = Math.max(-0.03, Math.min(1.1, c.p));
         const ang = angOf(c.p);
         const n = u.needles[ci], sh = u.shadows[ci];
         n.setAttribute("transform", `rotate(${ang.toFixed(2)} ${n.dataset.cx} ${n.dataset.cy})`);
         sh.setAttribute("transform", `translate(3 4) rotate(${ang.toFixed(2)} ${sh.dataset.cx} ${sh.dataset.cy})`);
-        if (dbfs + 18 > 1.2) c.peakHold = 0.35; else c.peakHold -= dt;
+        if (peakDb > cal.ref) c.peakHold = 0.5; else c.peakHold -= dt;    // PEAK lamp: above the 0 VU reference
         u.peaks[ci].classList.toggle("on", c.peakHold > 0);
       });
     });
