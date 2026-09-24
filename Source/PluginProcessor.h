@@ -4,6 +4,8 @@
 #include "Modes.h"
 #include "TruePeakLimiter.h"
 #include "MeterSettings.h"
+#include "EditHistory.h"
+#include "UpdateChecker.h"
 
 class VibetronProcessor : public juce::AudioProcessor
 {
@@ -54,6 +56,9 @@ public:
     // Meter calibration lives in the saved state as properties (message thread only).
     MeterSettings getMeterSettings() const;
     void setMeterSettings (const MeterSettings&);
+
+    EditHistory history { *this, [this] (const MeterSettings& m) { setMeterSettings (m); } };
+    juce::SharedResourcePointer<UpdateChecker> updates;
 
 private:
     static juce::AudioProcessorValueTreeState::ParameterLayout createLayout();

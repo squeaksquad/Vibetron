@@ -4,6 +4,7 @@
 #include "ModeSelector.h"
 #include "VUMeter.h"
 #include "CalPanel.h"
+#include "TopBar.h"
 
 // "VU CAL" pill between the meters: shows the current reference and opens the calibration panel.
 class CalButton : public juce::Component
@@ -51,16 +52,22 @@ private:
 };
 
 // The whole instrument face, laid out in an 800 x 400 design space and scaled by the editor.
-class FacePlate : public juce::Component
+class FacePlate : public juce::Component, private juce::ChangeListener
 {
 public:
     static constexpr int designWidth = 800, designHeight = 400;
 
     explicit FacePlate (VibetronProcessor&);
+    ~FacePlate() override;
     void paint (juce::Graphics&) override;
     void resized() override;
 
+    // The live (possibly mid-fade) palette, for chrome outside the faceplate.
+    const Palette& getPalette() const { return palette; }
+    std::function<void()> onPaletteChanged;
+
 private:
+    void changeListenerCallback (juce::ChangeBroadcaster*) override { settingsPollCountdown = 0; }  // undo/redo
     void tick (double timestamp);
     void startThemeChange (int newMode);
 
@@ -90,10 +97,17 @@ private:
 class VibetronEditor : public juce::AudioProcessorEditor
 {
 public:
+    static constexpr int designWidth = FacePlate::designWidth, designHeight = FacePlate::designHeight + TopBar::height;
+
     explicit VibetronEditor (VibetronProcessor&);
     void paint (juce::Graphics& g) override { g.fillAll (juce::Colours::black); }
     void resized() override;
+    void mouseDown (const juce::MouseEvent&) override;  // clicks outside the About card close it
 
 private:
+    void setAboutOpen (bool);
+
     FacePlate face;
+    TopBar bar;
+    AboutPanel about;
 };

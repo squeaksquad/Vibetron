@@ -35,6 +35,8 @@ To publish, bump the version in `CMakeLists.txt` (`project(Vibetron VERSION ...)
 
 This also tags `v<version>` and creates a GitHub release with the notarized `.pkg` attached. It refuses to run from uncommitted or unpushed changes.
 
+The plug-in's ABOUT panel checks `api.github.com/repos/squeaksquad/Vibetron/releases/latest` (once per host session, and on demand) and shows a red dot when that release's tag is newer than the running build; DOWNLOAD UPDATE opens the release's `.pkg`. This only works while the repo is public.
+
 AAX release builds need PACE signing (wraptool) before Apple signing; this isn't wired up yet.
 
 ## Layout

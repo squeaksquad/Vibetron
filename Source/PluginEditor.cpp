@@ -179,12 +179,20 @@ FacePlate::FacePlate (VibetronProcessor& p)
     calPanel.onChange = [this] (const MeterSettings& s)
     {
         applyMeterSettings (s);
+        const auto before = proc.getMeterSettings();
         proc.setMeterSettings (s);
+        proc.history.recordMeterChange (before, s);
     };
     calPanel.setSettings (proc.getMeterSettings());
+    proc.history.changes().addChangeListener (this);
 
     setOpaque (true);
     setSize (designWidth, designHeight);
+}
+
+FacePlate::~FacePlate()
+{
+    proc.history.changes().removeChangeListener (this);
 }
 
 void FacePlate::resized()
@@ -225,6 +233,8 @@ void FacePlate::tick (double timestamp)
         const float eased = themeT * themeT * (3.0f - 2.0f * themeT);
         palette = Palette::lerp (fromPalette, Palette::forMode (themeMode), eased);
         repaint();
+        if (onPaletteChanged)
+            onPaletteChanged();
     }
 
     // If the host stops calling processBlock, let the needles fall rather than freeze.
@@ -318,19 +328,45 @@ void FacePlate::paint (juce::Graphics& g)
 
 //==============================================================================
 VibetronEditor::VibetronEditor (VibetronProcessor& p)
-    : AudioProcessorEditor (p), face (p)
+    : AudioProcessorEditor (p), face (p), bar (p, face.getPalette()), about (*p.updates, face.getPalette())
 {
     // Park keyboard focus on the editor itself so opening the window doesn't hand it to the first
     // focusable control; unhandled keys (space = play/stop, etc.) then fall through to the host.
     setWantsKeyboardFocus (true);
     addAndMakeVisible (face);
+    addAndMakeVisible (bar);
+    addChildComponent (about);
+    face.onPaletteChanged = [this] { bar.repaint(); about.repaint(); };
+    bar.onAbout = [this] { setAboutOpen (! about.isVisible()); };
+    addMouseListener (this, true);
+
     setResizable (true, true);
-    setResizeLimits (600, 300, 1800, 900);
-    getConstrainer()->setFixedAspectRatio ((double) FacePlate::designWidth / FacePlate::designHeight);
-    setSize (1000, 500);
+    setResizeLimits (600, 600 * designHeight / designWidth, 1800, 1800 * designHeight / designWidth);
+    getConstrainer()->setFixedAspectRatio ((double) designWidth / designHeight);
+    setSize (1000, 1000 * designHeight / designWidth);
+
+    p.updates->checkOnceAutomatically();
 }
 
 void VibetronEditor::resized()
 {
-    face.setTransform (juce::AffineTransform::scale ((float) getWidth() / (float) FacePlate::designWidth));
+    const auto scale = juce::AffineTransform::scale ((float) getWidth() / (float) designWidth);
+    bar.setBounds (0, 0, designWidth, TopBar::height);
+    face.setBounds (0, TopBar::height, FacePlate::designWidth, FacePlate::designHeight);
+    about.setBounds (designWidth - 10 - AboutPanel::width, TopBar::height + 4, AboutPanel::width, AboutPanel::height);
+    for (auto* c : std::initializer_list<juce::Component*> { &bar, &face, &about })
+        c->setTransform (scale);
+}
+
+void VibetronEditor::setAboutOpen (bool open)
+{
+    about.setVisible (open);
+    bar.setAboutOpen (open);
+}
+
+void VibetronEditor::mouseDown (const juce::MouseEvent& e)
+{
+    auto* target = e.eventComponent;
+    if (about.isVisible() && target != &about && ! about.isParentOf (target) && target != &bar.aboutButton())
+        setAboutOpen (false);
 }

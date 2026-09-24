@@ -51,7 +51,10 @@ target_sources(Vibetron PRIVATE
     Source/ModeSelector.cpp
     Source/Textures.cpp
     Source/TruePeakLimiter.cpp
-    Source/CalPanel.cpp)
+    Source/CalPanel.cpp
+    Source/EditHistory.cpp
+    Source/UpdateChecker.cpp
+    Source/TopBar.cpp)
 
 target_compile_definitions(Vibetron PUBLIC
     JUCE_WEB_BROWSER=0
