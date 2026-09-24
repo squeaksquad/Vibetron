@@ -33,7 +33,7 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          cmake -B build -G "Visual Studio 17 2022" -A x64 -DJUCE_DIR="$GITHUB_WORKSPACE/JUCE"
+          cmake -B build -A x64 -DJUCE_DIR="$GITHUB_WORKSPACE/JUCE"
           cmake --build build --config Release --target Vibetron_VST3 Vibetron_Standalone --parallel
 
       - name: Package
