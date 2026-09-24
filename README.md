@@ -37,6 +37,8 @@ This also tags `v<version>` and creates a GitHub release with the notarized `.pk
 
 The plug-in's ABOUT panel checks `api.github.com/repos/squeaksquad/Vibetron/releases/latest` (once per host session, and on demand) and shows a red dot when that release's tag is newer than the running build; DOWNLOAD UPDATE opens the release's `.pkg`. This only works while the repo is public.
 
+Pushing the `v<version>` tag also triggers the **Windows installer** workflow (`.github/workflows/windows.yml`), which builds the VST3 and Standalone with MSVC, packages them with Inno Setup (`scripts/windows/installer.iss`) and attaches `Vibetron-VT-369-<version>-Windows.exe` to the same release. It can also be run by hand from the Actions tab; the installer is then kept as a workflow artifact. The Windows build is unsigned, so SmartScreen warns on first run. The workflow pins JUCE to a commit; update `JUCE_REF` when you update your local JUCE checkout.
+
 AAX release builds need PACE signing (wraptool) before Apple signing; this isn't wired up yet.
 
 ## Layout

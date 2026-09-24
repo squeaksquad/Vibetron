@@ -66,10 +66,15 @@ void UpdateChecker::run()
     if (version.isEmpty())
         return finish (Status::failed, {}, {});
 
+   #if JUCE_WINDOWS
+    const char* installerSuffix = ".exe";
+   #else
+    const char* installerSuffix = ".pkg";
+   #endif
     juce::String download = release["html_url"].toString();
     if (const auto* assets = release["assets"].getArray())
         for (const auto& asset : *assets)
-            if (asset["name"].toString().endsWithIgnoreCase (".pkg"))
+            if (asset["name"].toString().endsWithIgnoreCase (installerSuffix))
                 download = asset["browser_download_url"].toString();
 
     finish (isNewer (version, currentVersion()) ? Status::available : Status::upToDate, version, download);

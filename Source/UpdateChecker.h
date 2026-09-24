@@ -20,7 +20,7 @@ public:
     // Message thread only.
     Status getStatus() const { return status; }
     juce::String getLatestVersion() const { return latestVersion; }
-    void openDownload() const;  // the release's .pkg, or its page if it has none
+    void openDownload() const;  // this platform's installer (.pkg / .exe), or the release page if it has none
 
     static juce::String currentVersion();
     static bool isNewer (const juce::String& candidate, const juce::String& current);

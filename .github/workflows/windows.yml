@@ -1,0 +1,65 @@
+name: Windows installer
+
+# Builds the VST3 + Standalone with MSVC and packages them with Inno Setup. On a v* tag (pushed by
+# scripts/package_macos.sh --publish) the installer is attached to that GitHub release.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  JUCE_REF: 501c07674e1ad693085a7e7c398f205c2677f5da  # keep in step with the local JUCE checkout
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: juce-framework/JUCE
+          ref: ${{ env.JUCE_REF }}
+          path: JUCE
+
+      - name: Read version
+        id: version
+        shell: bash
+        run: echo "version=$(sed -nE 's/^project\(Vibetron VERSION ([0-9.]+)\).*/\1/p' CMakeLists.txt)" >> "$GITHUB_OUTPUT"
+
+      - name: Build
+        shell: bash
+        run: |
+          cmake -B build -G "Visual Studio 17 2022" -A x64 -DJUCE_DIR="$GITHUB_WORKSPACE/JUCE"
+          cmake --build build --config Release --target Vibetron_VST3 Vibetron_Standalone --parallel
+
+      - name: Package
+        shell: pwsh
+        run: |
+          choco install innosetup --no-progress -y
+          & "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" `
+            "/DAppVersion=${{ steps.version.outputs.version }}" `
+            "/DArtefacts=$env:GITHUB_WORKSPACE\build\Vibetron_artefacts\Release" `
+            scripts\windows\installer.iss
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: dist/*.exe
+
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          [[ "$tag" == "v${{ steps.version.outputs.version }}" ]] || { echo "Tag $tag doesn't match CMakeLists.txt version"; exit 1; }
+          # The macOS script creates the release right after pushing the tag; give it time to land.
+          for i in $(seq 1 30); do gh release view "$tag" > /dev/null 2>&1 && break; sleep 20; done
+          gh release view "$tag" > /dev/null 2>&1 || gh release create "$tag" --verify-tag --title "Vibetron VT-369 ${{ steps.version.outputs.version }}" --notes ""
+          gh release upload "$tag" dist/*.exe --clobber

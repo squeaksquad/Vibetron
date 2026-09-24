@@ -136,10 +136,10 @@ if [[ "$PUBLISH" == 1 ]]; then
     else
         git rev-parse -q --verify "refs/tags/$TAG" > /dev/null || git tag -a "$TAG" -m "$PRODUCT $VERSION"
         git push -q origin "$TAG"
-        gh release create "$TAG" "$PKG_OUT" --verify-tag --title "$PRODUCT $VERSION" --notes "Notarized macOS installer for $PRODUCT $VERSION.
+        gh release create "$TAG" "$PKG_OUT" --verify-tag --title "$PRODUCT $VERSION" --notes "$PRODUCT $VERSION installers.
 
-- AU and VST3, universal (Apple Silicon + Intel), macOS 11 or later
-- Installs to /Library/Audio/Plug-Ins (choose AU, VST3 or both via Customize)"
+- macOS (.pkg, notarized): AU and VST3, universal (Apple Silicon + Intel), macOS 11 or later. Installs to /Library/Audio/Plug-Ins (choose AU, VST3 or both via Customize).
+- Windows (.exe, 64-bit): VST3 and Standalone. Built and attached by GitHub Actions a few minutes after publishing."
     fi
     gh release view "$TAG" --json url --jq .url
 fi
