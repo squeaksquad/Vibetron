@@ -44,3 +44,7 @@ AAX release builds need PACE signing (wraptool) before Apple signing; this isn't
 - `Source/` — processor, limiter, meters, knob, calibration panel, textures
 - `scripts/package_macos.sh` — release pipeline
 - `mockups/` — the original HTML design directions
+
+## License
+
+Vibetron is free software, licensed under the [GNU Affero General Public License v3.0](LICENSE). You may use, modify and redistribute it, including commercially, provided any version you distribute is released under the same license with its complete source. It is built on [JUCE](https://juce.com), used here under JUCE's AGPLv3 option.
