@@ -21,6 +21,7 @@ PillButton::PillButton (const Palette& palette, juce::String t)
 {
     setTitle (text);
     setWantsKeyboardFocus (true);
+    setMouseClickGrabsKeyboardFocus (false);
     setMouseCursor (juce::MouseCursor::PointingHandCursor);
 }
 
@@ -71,6 +72,7 @@ CalSlider::CalSlider (const Palette& palette, juce::String l, float minValue, fl
     }
     setTitle (label);
     setWantsKeyboardFocus (true);
+    setMouseClickGrabsKeyboardFocus (false);
     setMouseCursor (juce::MouseCursor::LeftRightResizeCursor);
 }
 

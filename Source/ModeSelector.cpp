@@ -12,7 +12,8 @@ ModeSelector::ModeSelector (const Palette& palette, juce::RangedAudioParameter& 
     : pal (palette),
       attachment (modeParam, [this] (float v) { setFromParameter (v); }, nullptr)
 {
-    setWantsKeyboardFocus (true);
+    setWantsKeyboardFocus (true);  // reachable with Tab, but a click mustn't steal host shortcuts
+    setMouseClickGrabsKeyboardFocus (false);
     setTitle ("Mode");
     setMouseCursor (juce::MouseCursor::DraggingHandCursor);
     attachment.sendInitialUpdate();

@@ -320,6 +320,9 @@ void FacePlate::paint (juce::Graphics& g)
 VibetronEditor::VibetronEditor (VibetronProcessor& p)
     : AudioProcessorEditor (p), face (p)
 {
+    // Park keyboard focus on the editor itself so opening the window doesn't hand it to the first
+    // focusable control; unhandled keys (space = play/stop, etc.) then fall through to the host.
+    setWantsKeyboardFocus (true);
     addAndMakeVisible (face);
     setResizable (true, true);
     setResizeLimits (600, 300, 1800, 900);
