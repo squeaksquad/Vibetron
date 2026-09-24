@@ -239,7 +239,7 @@ bool ModeSelector::keyPressed (const juce::KeyPress& k)
 {
     if (k == juce::KeyPress::rightKey || k == juce::KeyPress::upKey)   { select (mode + 1); return true; }
     if (k == juce::KeyPress::leftKey  || k == juce::KeyPress::downKey) { select (mode - 1); return true; }
-    if (k == juce::KeyPress::spaceKey || k == juce::KeyPress::returnKey) { select ((mode + 1) % numModes); return true; }
+    if (k == juce::KeyPress::returnKey) { select ((mode + 1) % numModes); return true; }
     return false;
 }
 
