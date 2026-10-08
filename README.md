@@ -25,7 +25,12 @@ AU and VST3 are copied to `~/Library/Audio/Plug-Ins` after each build. The unsig
 ./scripts/package_macos.sh
 ```
 
-Builds universal (arm64 + x86_64) AU and VST3, signs them with Developer ID, builds a signed `.pkg` that installs to `/Library/Audio/Plug-Ins`, then notarizes and staples it. Output: `dist/Vibetron-VT-369-<version>.pkg`. Requires the `vibetron` notarytool keychain profile.
+Builds universal (arm64 + x86_64) AU, VST3 and AAX, signs them, builds a signed `.pkg`, then notarizes and staples it. The installer offers each format as a choice: AU and VST3 go to `/Library/Audio/Plug-Ins`, AAX to `/Library/Application Support/Avid/Audio/Plug-Ins`. Output: `dist/Vibetron-VT-369-<version>.pkg`.
+
+Signing requirements:
+
+- Developer ID Application and Installer certificates, and the `vibetronics` notarytool keychain profile.
+- For AAX: the PACE Eden tools (`wraptool`), an iLok holding your PACE signing certificate (run Synchronize in iLok License Manager if `wraptool` can't find it), and `PACE_ACCOUNT` / `PACE_WCGUID` set in the environment or in an untracked `scripts/pace.env`. `wraptool` applies both the PACE and Developer ID signatures, so the AAX loads in retail Pro Tools. See the header of `scripts/package_macos.sh`.
 
 To publish, bump the version in `CMakeLists.txt` (`project(Vibetron VERSION ...)`), commit and push, then run:
 
@@ -38,8 +43,6 @@ This also tags `v<version>` and creates a GitHub release with the notarized `.pk
 The plug-in's ABOUT panel checks `api.github.com/repos/squeaksquad/Vibetron/releases/latest` (once per host session, and on demand) and shows a red dot when that release's tag is newer than the running build; DOWNLOAD UPDATE opens the release's `.pkg`. This only works while the repo is public.
 
 Pushing the `v<version>` tag also triggers the **Windows installer** workflow (`.github/workflows/windows.yml`), which builds the VST3 and Standalone with MSVC, packages them with Inno Setup (`scripts/windows/installer.iss`) and attaches `Vibetron-VT-369-<version>-Windows.exe` to the same release. It can also be run by hand from the Actions tab; the installer is then kept as a workflow artifact. The Windows build is unsigned, so SmartScreen warns on first run. The workflow pins JUCE to a commit; update `JUCE_REF` when you update your local JUCE checkout.
-
-The release `.pkg` also includes the AAX, PACE-signed with `wraptool` (which applies the Developer ID signature too). This needs the PACE Eden tools installed and `PACE_ACCOUNT` / `PACE_WCGUID` set in the environment or in an untracked `scripts/pace.env`; see the header of `scripts/package_macos.sh`.
 
 ## Layout
 
