@@ -1,7 +1,11 @@
 #!/bin/bash
 # package_macos.sh — universal build, sign, package, notarize and staple the Vibetron VT-369 installer.
-# Produces dist/Vibetron-VT-369-<version>.pkg installing the AU and VST3 into /Library/Audio/Plug-Ins.
-# AAX is not included yet: it must be PACE-signed (wraptool) before Apple signing.
+# Produces dist/Vibetron-VT-369-<version>.pkg installing the AU and VST3 into /Library/Audio/Plug-Ins
+# and the PACE-signed AAX into /Library/Application Support/Avid/Audio/Plug-Ins.
+#
+# AAX signing needs PACE_ACCOUNT (iLok account ID) and PACE_WCGUID (wrap config GUID from PACE Central),
+# from the environment or scripts/pace.env (untracked). Store the account password in wraptool's
+# keychain once with: wraptool sync --account <id> --password <password>
 #
 # Usage: ./scripts/package_macos.sh [--publish]
 #   --publish  also tag v<version> and publish a GitHub release with the .pkg attached
@@ -14,6 +18,8 @@ TEAM_ID="H674XZA5GP"
 APP_SIGN_ID="Developer ID Application: Bryan DiMaio ($TEAM_ID)"
 PKG_SIGN_ID="Developer ID Installer: Bryan DiMaio ($TEAM_ID)"
 NOTARY_PROFILE="vibetronics"
+WRAPTOOL="/Applications/PACEAntiPiracy/Eden/Fusion/Current/bin/wraptool"
+[[ -f scripts/pace.env ]] && source scripts/pace.env
 
 PRODUCT="Vibetron VT-369"
 PKG_ID_BASE="com.vibetron.vt369"
@@ -43,21 +49,25 @@ if [[ "$PUBLISH" == 1 ]]; then
     fi
 fi
 
+[[ -x "$WRAPTOOL" ]] || { echo "wraptool not found at $WRAPTOOL"; exit 1; }
+[[ -n "${PACE_ACCOUNT:-}" && -n "${PACE_WCGUID:-}" ]] || { echo "Set PACE_ACCOUNT and PACE_WCGUID (environment or scripts/pace.env)."; exit 1; }
+
 echo "=== 1. Universal release build (arm64 + x86_64) ==="
 cmake -B "$BUILD_DIR" -G Xcode \
     -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" \
     -DVIBETRON_INSTALL_AAX=OFF > /dev/null
-cmake --build "$BUILD_DIR" --config Release --target Vibetron_AU Vibetron_VST3 -- -quiet
+cmake --build "$BUILD_DIR" --config Release --target Vibetron_AU Vibetron_VST3 Vibetron_AAX -- -quiet
 
 AU="$ARTEFACTS/AU/$PRODUCT.component"
 VST3="$ARTEFACTS/VST3/$PRODUCT.vst3"
-for b in "$AU" "$VST3"; do
+AAX="$ARTEFACTS/AAX/$PRODUCT.aaxplugin"
+for b in "$AU" "$VST3" "$AAX"; do
     [[ -d "$b" ]] || { echo "Missing build output: $b"; exit 1; }
     lipo -info "$b/Contents/MacOS/$PRODUCT"
 done
 
 echo "=== 2. Stage and sign inside-out (hardened runtime + timestamp) ==="
-rm -rf "$WORK" && mkdir -p "$WORK/au-root" "$WORK/vst3-root"
+rm -rf "$WORK" && mkdir -p "$WORK/au-root" "$WORK/vst3-root" "$WORK/aax-root"
 ditto "$AU" "$WORK/au-root/$PRODUCT.component"
 ditto "$VST3" "$WORK/vst3-root/$PRODUCT.vst3"
 for b in "$WORK/au-root/$PRODUCT.component" "$WORK/vst3-root/$PRODUCT.vst3"; do
@@ -68,6 +78,15 @@ for b in "$WORK/au-root/$PRODUCT.component" "$WORK/vst3-root/$PRODUCT.vst3"; do
     codesign --force --sign "$APP_SIGN_ID" --options runtime --timestamp "$b"
     codesign --verify --deep --strict --verbose=2 "$b"
 done
+
+# AAX: wraptool applies the PACE signature and the Developer ID signature together.
+# Don't codesign the bundle afterwards; that would invalidate the PACE signature.
+ditto "$AAX" "$WORK/aax-root/$PRODUCT.aaxplugin"
+"$WRAPTOOL" sign --verbose --account "$PACE_ACCOUNT" --wcguid "$PACE_WCGUID" --signid "$APP_SIGN_ID" \
+    --allowsigningservice --dsigharden --dsig1-compat off \
+    --in "$WORK/aax-root/$PRODUCT.aaxplugin" --out "$WORK/aax-root/$PRODUCT.aaxplugin"
+"$WRAPTOOL" verify --in "$WORK/aax-root/$PRODUCT.aaxplugin"
+codesign --verify --deep --strict --verbose=2 "$WORK/aax-root/$PRODUCT.aaxplugin"
 
 echo "=== 3. Component packages (non-relocatable) ==="
 make_component_pkg () {   # root, install location, identifier, output
@@ -82,8 +101,9 @@ make_component_pkg () {   # root, install location, identifier, output
 }
 make_component_pkg "$WORK/au-root" "/Library/Audio/Plug-Ins/Components" "$PKG_ID_BASE.au" "$WORK/au.pkg"
 make_component_pkg "$WORK/vst3-root" "/Library/Audio/Plug-Ins/VST3" "$PKG_ID_BASE.vst3" "$WORK/vst3.pkg"
+make_component_pkg "$WORK/aax-root" "/Library/Application Support/Avid/Audio/Plug-Ins" "$PKG_ID_BASE.aax" "$WORK/aax.pkg"
 
-echo "=== 4. Product installer (choices: AU, VST3) ==="
+echo "=== 4. Product installer (choices: AU, VST3, AAX) ==="
 cat > "$WORK/distribution.xml" <<EOF
 <?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="2">
@@ -95,6 +115,7 @@ cat > "$WORK/distribution.xml" <<EOF
     <choices-outline>
         <line choice="au"/>
         <line choice="vst3"/>
+        <line choice="aax"/>
     </choices-outline>
     <choice id="au" title="Audio Unit (AU)" description="For Logic Pro, GarageBand, REAPER and other AU hosts.">
         <pkg-ref id="$PKG_ID_BASE.au"/>
@@ -102,8 +123,12 @@ cat > "$WORK/distribution.xml" <<EOF
     <choice id="vst3" title="VST3" description="For REAPER, Ableton Live, Cubase, Studio One and other VST3 hosts.">
         <pkg-ref id="$PKG_ID_BASE.vst3"/>
     </choice>
+    <choice id="aax" title="AAX" description="For Pro Tools.">
+        <pkg-ref id="$PKG_ID_BASE.aax"/>
+    </choice>
     <pkg-ref id="$PKG_ID_BASE.au" version="$VERSION">au.pkg</pkg-ref>
     <pkg-ref id="$PKG_ID_BASE.vst3" version="$VERSION">vst3.pkg</pkg-ref>
+    <pkg-ref id="$PKG_ID_BASE.aax" version="$VERSION">aax.pkg</pkg-ref>
 </installer-gui-script>
 EOF
 mkdir -p "$DIST"
@@ -138,7 +163,7 @@ if [[ "$PUBLISH" == 1 ]]; then
         git push -q origin "$TAG"
         gh release create "$TAG" "$PKG_OUT" --verify-tag --title "$PRODUCT $VERSION" --notes "$PRODUCT $VERSION installers.
 
-- macOS (.pkg, notarized): AU and VST3, universal (Apple Silicon + Intel), macOS 11 or later. Installs to /Library/Audio/Plug-Ins (choose AU, VST3 or both via Customize).
+- macOS (.pkg, notarized): AU, VST3 and AAX (Pro Tools), universal (Apple Silicon + Intel), macOS 11 or later. Choose formats via Customize.
 - Windows (.exe, 64-bit): VST3 and Standalone. Built and attached by GitHub Actions a few minutes after publishing."
     fi
     gh release view "$TAG" --json url --jq .url

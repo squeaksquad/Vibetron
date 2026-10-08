@@ -39,7 +39,7 @@ The plug-in's ABOUT panel checks `api.github.com/repos/squeaksquad/Vibetron/rele
 
 Pushing the `v<version>` tag also triggers the **Windows installer** workflow (`.github/workflows/windows.yml`), which builds the VST3 and Standalone with MSVC, packages them with Inno Setup (`scripts/windows/installer.iss`) and attaches `Vibetron-VT-369-<version>-Windows.exe` to the same release. It can also be run by hand from the Actions tab; the installer is then kept as a workflow artifact. The Windows build is unsigned, so SmartScreen warns on first run. The workflow pins JUCE to a commit; update `JUCE_REF` when you update your local JUCE checkout.
 
-AAX release builds need PACE signing (wraptool) before Apple signing; this isn't wired up yet.
+The release `.pkg` also includes the AAX, PACE-signed with `wraptool` (which applies the Developer ID signature too). This needs the PACE Eden tools installed and `PACE_ACCOUNT` / `PACE_WCGUID` set in the environment or in an untracked `scripts/pace.env`; see the header of `scripts/package_macos.sh`.
 
 ## Layout
 
